@@ -1,0 +1,17 @@
+<div id="login-form-container">
+  <form ng-submit="$ctrl.submit()" id="login-form">
+    <p class="form-error" ng-show="$ctrl.error">{{$ctrl.error}}</p>
+    <fieldset>
+      <legend>Login form</legend>
+      <p>
+        <label for="login">Login:</label><br>
+        <input type="text" id="login" ng-model="$ctrl.login" required>
+      </p>
+      <p>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" ng-model="$ctrl.password" required>
+      </p>
+    </fieldset>
+    <p class="submit"><input type="submit" id="submit" value="SIGN IN"></p>
+  </form>
+</div>
