@@ -6,6 +6,9 @@ angular.module('expressChat')
         $locationProvider.hashPrefix('!');
 
         $routeProvider
+        .when('/', {
+            template: ''
+        })
         .when('/main', {
             template: '<main-page></main-page>'
         })
@@ -14,6 +17,6 @@ angular.module('expressChat')
         })
         .when('/register', {
             template: '<register></register>'
-        }).otherwise('/main');
+        }).otherwise('/');
     }
 ]);
