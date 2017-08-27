@@ -5,10 +5,19 @@
   <title></title>
   <link rel="stylesheet" href="expresschat.css">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+  <script src="angularjs/angular.min.js"></script>
+  <script src="angularjs/angular-route.min.js"></script>
   <script src="expresschat.module.js"></script>
+  <script src="expresschat.config.js"></script>
+  <script src="navigation-panel/navigation-panel.module.js"></script>
+  <script src="navigation-panel/navigation-panel.component.js"></script>
+  <script src="main-page/main-page.module.js"></script>
+  <script src="main-page/main-page.component.js"></script>
 </head>
 <body>
-  
+  <div ng-app="expressChat" id="expresschat">
+    <navigation-panel ng-if="userId"></navigation-panel>
+    <div ng-view ng-class="{'has-navigation': userId}" id="content-view"></div>
+  </div>
 </body>
 </html>
