@@ -1,6 +1,10 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
 #expresschat {
     width: 1200px;
-    height: 800px;
     margin: 0 auto;
     background-color: #fff;
 }
