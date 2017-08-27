@@ -6,16 +6,24 @@ const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
+const session = require("express-session");
 
 const auth = require("./routes/auth");
 
 const app = express();
 
 app.use(bodyParser.json());
-app.use("/", auth);
+app.use(cookieParser());
+app.use(session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(flash());
 app.use(passport.session());
+
+app.use("/", auth);
 
 app.use(express.static(path.join(__dirname, 'public')));
 

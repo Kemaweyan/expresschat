@@ -7,11 +7,7 @@ router.get('/login', (req, res) => {
     if (req.user) {
         
     } else {
-        if (req.flash.error){
-            res.status(401).send({error: req.flash.error});
-        } else {
-            res.status(401).send('Not authorized');
-        }
+        res.status(401).send({error: req.flash('error')});
     }
 });
 
