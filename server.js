@@ -1,10 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require('path');
 
 const auth = require("./routes/auth");
 
 const app = express();
 app.use("/", auth);
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect('mongodb://localhost/expresschat', {useMongoClient: true});
 
