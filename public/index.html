@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="expressChat">
+<html ng-app="expressChatApp">
 <head>
   <meta charset="utf-8">
   <title>The Express Chat</title>
@@ -7,18 +7,17 @@
 
   <script src="angularjs/angular.min.js"></script>
   <script src="angularjs/angular-route.min.js"></script>
-  <script src="expresschat.module.js"></script>
-  <script src="expresschat.config.js"></script>
-  <script src="common/full-height.directive.js"></script>
+  <script src="app.module.js"></script>
+  <script src="expresschat/expresschat.module.js"></script>
+  <script src="expresschat/expresschat.config.js"></script>
+  <script src="expresschat/expresschat.component.js"></script>
+  <script src="expresschat/full-height.directive.js"></script>
   <script src="navigation-panel/navigation-panel.module.js"></script>
   <script src="navigation-panel/navigation-panel.component.js"></script>
   <script src="main-page/main-page.module.js"></script>
   <script src="main-page/main-page.component.js"></script>
 </head>
 <body>
-  <div id="expresschat" full-height>
-    <navigation-panel ng-if="userId"></navigation-panel>
-    <div ng-view ng-class="{'has-navigation': userId}" id="content-view"></div>
-  </div>
+  <express-chat></express-chat>
 </body>
 </html>
