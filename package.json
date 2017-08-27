@@ -8,5 +8,10 @@
     "start": "node server.js"
   },
   "author": "Taras Gaidukov",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "mongoose": "^4.11.8",
+    "passport": "^0.4.0"
+  }
 }
