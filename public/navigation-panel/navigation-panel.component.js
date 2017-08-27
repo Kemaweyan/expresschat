@@ -3,7 +3,7 @@
 angular
   .module('navigationPanel')
   .component('navigationPanel', {
-    templateUrl: 'navigation-panel.template.html',
+    templateUrl: 'navigation-panel/navigation-panel.template.html',
     controller: ['$routeParams',
         function ($routeParams) {
             
