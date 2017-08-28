@@ -13,6 +13,11 @@ angular
             }
 
             self.submit = function () {
+                if (self.password != self.confirm) {
+                    self.error = "Password confirmation does not match";
+                    return;
+                }
+
                 var data = {
                     username: self.username,
                     firstname: self.firstname,
