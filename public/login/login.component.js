@@ -17,7 +17,7 @@ angular
                     User.setUser(resp.data);
                     $location.path('/');
                 }, function (resp) {
-                    self.error = resp.data.error;
+                    self.error = resp.data.error.join(", ");
                     self.password = "";
                 });
             };

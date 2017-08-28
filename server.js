@@ -27,6 +27,11 @@ app.use("/", auth);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+const User = require("./models/user");
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 mongoose.connect('mongodb://localhost/expresschat', {useMongoClient: true});
 
 const port = 3000;
