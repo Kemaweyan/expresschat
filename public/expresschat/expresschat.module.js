@@ -5,6 +5,6 @@ angular.module('expressChat', [
     'core',
     'login',
     'register',
-    'navigationPanel',
+    'controlPanel',
     'mainPage'
 ]);
