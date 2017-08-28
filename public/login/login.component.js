@@ -13,7 +13,12 @@ angular
             }
 
             self.submit = function () {
-                Backend.postLoginData(self.login, self.password).then(function (resp) {
+                var data = {
+                    username: self.username,
+                    password: self.password
+                };
+
+                Backend.postLoginData(data).then(function (resp) {
                     User.setUser(resp.data);
                     $location.path('/');
                 }, function (resp) {

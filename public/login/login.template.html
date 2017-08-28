@@ -1,11 +1,11 @@
-<div id="login-form-container">
+<div id="form-container">
   <form ng-submit="$ctrl.submit()" id="login-form">
     <p class="form-error" ng-show="$ctrl.error">{{$ctrl.error}}</p>
     <fieldset>
       <legend>Login form</legend>
       <p>
-        <label for="login">Login:</label><br>
-        <input type="text" id="login" ng-model="$ctrl.login" required>
+        <label for="username">Login:</label><br>
+        <input type="text" id="username" ng-model="$ctrl.username" required>
       </p>
       <p>
         <label for="password">Password:</label><br>
@@ -14,7 +14,7 @@
     </fieldset>
     <div class="button-container">
         <div class="submit"><input type="submit" id="submit" value="SIGN IN"></div>
-        <div class="register"><a ng-href="#!/register">Create account</a></div>
+        <div class="register"><a ng-href="#!/register">Create an account</a></div>
     </div>
   </form>
 </div>

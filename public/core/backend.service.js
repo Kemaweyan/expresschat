@@ -10,8 +10,12 @@ angular
             return sendRequest('GET', '/login');
         };
 
-        self.postLoginData = function (login, password) {
-            return sendRequest('POST', '/login', {login: login, password: password});
+        self.postLoginData = function (data) {
+            return sendRequest('POST', '/login', data);
+        };
+
+        self.postRegisterData = function (data) {
+            return sendRequest('POST', '/register', data);
         };
 
         function sendRequest(method, url, data) {

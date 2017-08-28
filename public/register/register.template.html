@@ -1,0 +1,36 @@
+<div id="form-container">
+  <form ng-submit="$ctrl.submit()" id="register-form">
+    <p class="form-error" ng-show="$ctrl.error">{{$ctrl.error}}</p>
+    <fieldset>
+      <legend>Create an account</legend>
+      <p>
+        <label for="username">Login:</label><br>
+        <input type="text" id="username" ng-model="$ctrl.username" required>
+      </p>
+      <p>
+        <label for="firstname">First name:</label><br>
+        <input type="text" id="firstname" ng-model="$ctrl.firstname" required>
+      </p>
+      <p>
+        <label for="lastname">Last name:</label><br>
+        <input type="text" id="lastname" ng-model="$ctrl.lastname" required>
+      </p>
+      <p>
+        <label for="email">E-mail:</label><br>
+        <input type="email" id="email" ng-model="$ctrl.email" required>
+      </p>
+      <p>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" ng-model="$ctrl.password" required>
+      </p>
+      <p>
+        <label for="confirm">Confirm password:</label><br>
+        <input type="password" id="confirm" ng-model="$ctrl.confirm" required>
+      </p>
+    </fieldset>
+    <div class="button-container">
+        <div class="submit"><input type="submit" id="submit" value="REGISTER"></div>
+        <div class="cancel"><input type="button" id="cancel" value="CANCEL" ng-click="$ctrl.cancel()"></div>
+    </div>
+  </form>
+</div>

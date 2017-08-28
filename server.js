@@ -32,6 +32,7 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/expresschat', {useMongoClient: true});
 
 const port = 3000;
