@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('expressChat')
+  .module('core')
   .directive('fullHeight', ['$window',
     function ($window) {
         return {
