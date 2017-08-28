@@ -2,8 +2,8 @@
 
 angular
   .module('core')
-  .service('Backend', ['$http', '$location', '$q',
-    function ($http, $location, $q) {
+  .service('Backend', ['$http', '$location', '$q', 'User',
+    function ($http, $location, $q, User) {
         var self = this;
 
         self.getAuthInfo = function () {
@@ -23,6 +23,7 @@ angular
                 null,
                 function (resp) {
                     if (resp.status == 401) {
+                        User.resetUser();
                         $location.path('/login');
                     }
                     return $q.reject(resp);

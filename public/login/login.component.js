@@ -4,17 +4,17 @@ angular
   .module('login')
   .component('login', {
     templateUrl: "login/login.template.html",
-    controller: ['$location', 'Backend', 'Auth',
-        function ($location, Backend, Auth) {
+    controller: ['$location', 'Backend', 'User',
+        function ($location, Backend, User) {
             var self = this;
 
-            if (Auth.userId) {
+            if (User.id) {
                 $location.path('/');
             }
 
             self.submit = function () {
                 Backend.postLoginData(self.login, self.password).then(function (resp) {
-                    Auth.setUser(resp.data);
+                    User.setUser(resp.data);
                     $location.path('/');
                 }, function (resp) {
                     self.error = resp.data.error;
