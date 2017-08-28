@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/login', (req, res) => {
     if (req.user) {
+        // send user data
         res.send({"id": "12345", "login": "kem", "firstname": "Taras", "lastname": "Gaidukov", "email": "kemaweyan@gmail.com", "avatar": "userpic.png"});
     } else {
         res.status(401).send({error: req.flash('error')});
@@ -22,10 +23,6 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/login',
 
 router.post('/logout', (req, res) => {
     // get a logout request
-});
-
-router.get('/register', (req, res) => {
-    // get a registration form
 });
 
 router.post('/register', (req, res) => {
