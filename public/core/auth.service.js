@@ -16,5 +16,15 @@ angular
                 }
             );
         };
+
+        self.logout = function () {
+            return Backend.getLogout().then(
+                function (resp) {
+                    User.resetUser();
+                    return resp;
+                },
+                function (resp) {}
+            );
+        };
     }
 ]);

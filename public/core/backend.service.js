@@ -18,6 +18,10 @@ angular
             return sendRequest('POST', '/register', data);
         };
 
+        self.getLogout = function () {
+            return sendRequest('GET', '/logout');
+        };
+
         function sendRequest(method, url, data) {
             return $http({
                 method: method,

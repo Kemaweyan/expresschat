@@ -22,7 +22,11 @@ angular
                     User.setUser(resp.data);
                     $location.path('/');
                 }, function (resp) {
-                    self.error = resp.data.error.join(", ");
+                    if (resp.status == 401) {
+                        self.error = resp.data.error.join(", ");
+                    } else {
+                        self.error = resp.data.error;
+                    }
                     self.password = "";
                 });
             };

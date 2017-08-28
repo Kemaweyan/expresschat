@@ -33,7 +33,7 @@ angular
                     }, function (resp) {
                         self.error = resp.data.error;
                         self.password = "";
-                        self.password2 = "";
+                        self.confirm = "";
                     }
                 );
             };

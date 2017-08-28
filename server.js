@@ -35,6 +35,10 @@ passport.deserializeUser(User.deserializeUser());
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/expresschat', {useMongoClient: true});
 
+app.use((err, req, res, next) => {
+    res.status(err.status || 500).send({error: err.message});
+});
+
 const port = 3000;
 
 app.listen(port, () => {

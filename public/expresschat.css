@@ -53,6 +53,7 @@ p.form-error {
 a {
     text-decoration: none;
     color: #4092de;
+    cursor: pointer;
 }
 a:hover {
     text-decoration: underline;
@@ -79,7 +80,7 @@ a:hover {
 }
 
 #login-form {
-    width: 300px;
+    width: 320px;
 }
 #login-form .register {
     margin-right: 128px;
