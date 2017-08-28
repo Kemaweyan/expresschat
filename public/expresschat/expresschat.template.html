@@ -1,4 +1,4 @@
 <div full-height="" id="expresschat">
-  <navigation-panel ng-if="$root.userId"></navigation-panel>
-  <div ng-view="" ng-class="{'has-navigation': $root.userId}" id="content-view"></div>
+  <navigation-panel ng-if="$ctrl.authorized"></navigation-panel>
+  <div ng-view="" ng-class="{'has-navigation': $ctrl.authorized}" id="content-view"></div>
 </div>

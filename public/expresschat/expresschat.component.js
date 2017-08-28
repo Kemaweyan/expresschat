@@ -4,18 +4,19 @@ angular
   .module('expressChat')
   .component('expressChat', {
     templateUrl: "expresschat/expresschat.template.html",
-    controller: ['$rootScope', 'Backend',
-        function ($rootScope, Backend) {
+    controller: ['$rootScope', 'Auth',
+        function ($rootScope, Auth) {
             var self = this;
+            self.authorized = false;
 
-            Backend.getAuthInfo().then(function (data) {
-                $rootScope.userId = data.id
-                $rootScope.userLogin = data.login;
-                $rootScope.userFirstName = data.firstname;
-                $rootScope.userLastName = data.lastname;
-            }, function (resp) {
-                $rootScope.userId = null;
-            });
+            Auth.login().then(
+                function (resp) {
+                    self.authorized = true;
+                },
+                function (resp) {
+                    self.authorized = false;
+                }
+            );
         }
     ]
 });

@@ -15,20 +15,19 @@ angular
         };
 
         function sendRequest(method, url, data) {
-            return $q(function (resolve, reject) {
-                $http({
-                    method: method,
-                    url: url,
-                    data: data
-                }).then(function (resp) {
-                    resolve(resp.data);
-                }, function (resp) {
+            return $http({
+                method: method,
+                url: url,
+                data: data
+            }).then(
+                null,
+                function (resp) {
                     if (resp.status == 401) {
                         $location.path('/login');
                     }
-                    reject(resp);
-                });
-            });
+                    return $q.reject(resp);
+                }
+            );
         }
     }
 ]);

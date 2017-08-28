@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/login', (req, res) => {
     if (req.user) {
-        
+        res.send({"id": "12345", "login": "kem", "firstname": "Taras", "lastname": "Gaidukov", "email": "kemaweyan@gmail.com", "avatar": "userpic.png"});
     } else {
         res.status(401).send({error: req.flash('error')});
     }
