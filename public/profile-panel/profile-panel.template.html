@@ -1,12 +1,14 @@
 <div id="profile-panel" class="panel">
-  <div class="avatar">
-    <img ng-src="$ctrl.avatar" alt="Avatar">
-  </div>
-  <div class="info">
-    <h1>{{$ctrl.userName}}</h1>
-    <div class="controls">
-      <a href="#!/settings">Settings</a><br>
-      <a ng-click="$ctrl.logout()">Logout</a>
+  <div class="profile-border">
+    <div class="avatar">
+      <img ng-src="{{$ctrl.avatar}}" alt="Avatar">
+    </div>
+    <div class="info">
+      <h4>{{$ctrl.userName}}</h4>
+      <div class="controls">
+        <a href="#!/settings">Settings</a><br>
+        <a ng-click="$ctrl.logout()">Logout</a>
+      </div>
     </div>
   </div>
 </div>
