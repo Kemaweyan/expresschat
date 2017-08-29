@@ -1,0 +1,15 @@
+<div id="chat-list-panel" class="panel" full-height="189">
+  <h2>MY CHATS</h2>
+  <div id="chat-list" class="panel-border" full-height="353">
+    <chat-item ng-repeat="chat in $ctrl.chats" chat-id="{{chat}}"></chat-item>
+  </div>
+  <div id="user-search">
+    <form id="user-search-form">
+      <fieldset>
+        <legend>User search</legend>
+        <input type="text" id="query" placeholder="Search" required>
+        <div class="submit"><input type="submit" id="submit" value="SEARCH"></div>
+      </fieldset>
+    </form>
+  </div>
+</div>

@@ -1,8 +1,9 @@
 <div full-height="0" id="expresschat">
   <div ng-if="$root.authorized" id="control-panel" class="top-container">
     <profile-panel></profile-panel>
+    <chat-list></chat-list>
   </div>
   <div ng-class="{'controls-visible': $root.authorized}" class="top-container">
-    <div full-height="60" ng-view="" ng-class="{'panel': $root.authorized}"></div>
+    <div full-height="40" ng-view="" ng-class="{'panel': $root.authorized}"></div>
   </div>
 </div>

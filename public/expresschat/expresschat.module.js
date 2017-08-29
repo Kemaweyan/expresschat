@@ -6,5 +6,6 @@ angular.module('expressChat', [
     'login',
     'register',
     'profilePanel',
+    'chatList',
     'mainPage'
 ]);

@@ -12,6 +12,7 @@ body {
 }
 .panel {
     margin: 0 10px 0 0;
+    padding: 10px;
 }
 .top-container {
     padding: 10px 0;
@@ -19,12 +20,18 @@ body {
 .controls-visible {
     margin-left: 360px;
 }
+.panel-border {
+    border: 1px #e0e0e0 solid;
+    border-radius: 5px;
+    padding: 5px;
+}
 
 fieldset {
     padding: 0 20px;
     border-radius: 5px;
     border: 1px #bbb solid;
     font-weight: bold;
+    margin: 0;
 }
 input[type="text"], input[type="password"], input[type="email"] {
     width: 100%;
@@ -68,17 +75,23 @@ a:hover {
     text-decoration: underline;
     color: #1b80de;
 }
+h2 {
+    font: bold 16px Verdana;
+    margin: 0;
+    text-align: center;
+    color: #555;
+}
 #form-container {
     padding: 100px 0 0 0;
 }
 #form-container form, .panel {
-    padding: 20px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     background-color: #fff;
     border-radius: 3px;
 }
 #form-container form {
     margin: 0 auto;
+    padding: 20px;
 }
 #form-container .button-container {
     overflow: hidden;
@@ -125,15 +138,11 @@ a:hover {
 }
 
 #profile-panel {
-    height: 110px;
-    padding: 10px;
+    height: 114px;
     overflow: hidden;
 }
-#profile-panel .profile-border {
-    border: 1px #e0e0e0 solid;
-    border-radius: 5px;
+#profile-panel .panel-border {
     height: 102px;
-    padding: 5px;
 }
 #profile-panel .avatar {
     float: left;
@@ -149,13 +158,32 @@ a:hover {
 #profile-panel .info {
     margin-left: 102px;
 }
-#profile-panel h4 {
-    font: bold 16px Verdana;
-    margin: 0;
-    text-align: center;
-}
 #profile-panel .controls {
     margin-top: 37px;
     text-align: right;
     padding-right: 5px;
+}
+
+#chat-list-panel {
+    margin-top: 15px;
+    overflow: hidden;
+}
+#chat-list-panel #chat-list {
+    margin-top: 5px;
+    overflow: hidden;
+}
+#chat-list-panel #user-search {
+    margin-top: 10px;
+}
+#chat-list-panel #user-search fieldset {
+    border: 1px #e0e0e0 solid;
+    padding: 10px 20px;
+}
+#chat-list-panel #user-search input[type="text"] {
+    border: 1px #999 solid;
+}
+#chat-list-panel #user-search .submit {
+    text-align: center;
+    height: 32px;
+    margin-top: 10px;
 }
