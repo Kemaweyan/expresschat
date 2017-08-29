@@ -1,19 +1,12 @@
-<div class="chat-item">
+<div class="chat-item" ng-class="{'unread-chat': $ctrl.unread}" ng-click="$ctrl.openChat()">
   <div class="avatar">
     <img ng-src="{{$ctrl.buddyAvatar}}" alt="{{$ctrl.buddyName}}'s avatar">
   </div>
   <div class="buddy-info">
     <h3>{{$ctrl.buddyName}}</h3>
-    <div class="links-container">
-      <div class="left-item">
-        <a href="#!/users/{{$ctrl.chat.buddyId}}">PROFILE</a>
-      </div>
-      <div class="right-item" ng-if="$ctrl.chat.unread">
-        UNREAD
-      </div>
-      <div class="middle-item">
-        <a href="#!/chats/{{$ctrl.chat.id}}">CHAT</a>
-      </div>
+    <div class="new-messages">
+      <span ng-show="$ctrl.unread">New messages</span>
+      <span ng-hide="$ctrl.unread">No new messages</span>
     </div>
   </div>
 </div>

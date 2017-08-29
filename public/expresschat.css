@@ -204,6 +204,17 @@ h3 {
     border-radius: 5px;
     margin: 2px 0;
     border: 1px solid #e0e0e0;
+    cursor: pointer;
+}
+#chat-list-panel .chat-item:hover {
+    background-color: #e6f3ff;
+}
+#chat-list-panel .unread-chat {
+    background-color: #f0f8ff;
+}
+
+#chat-list-panel .unread-chat span {
+    color: #f00;
 }
 #chat-list-panel .chat-item .avatar {
     float: left;
@@ -219,21 +230,7 @@ h3 {
     margin-left: 50px;
     padding-left: 5px;
 }
-#chat-list-panel .chat-item .links-container {
-    margin-top: 9px;
-    height: 24px;
-    overflow: hidden;
-    font-weight: bold;
-}
-#chat-list-panel .chat-item .left-item {
-    float: left;
-    width: 80px;
-}
-#chat-list-panel .chat-item .right-item {
-    float: right;
-    width: 80px;
-    color: #f00;
-}
-#chat-list-panel .chat-item .middle-item {
-    margin: 0 90px;
+#chat-list-panel .chat-item .new-messages {
+    margin-top: 12px;
+    font: italic 12px Verdana;
 }

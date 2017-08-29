@@ -7,11 +7,13 @@ angular
     bindings: {
         chat: "<"
     },
-    controller: ['Backend',
-        function (Backend) {
+    controller: ['Backend', '$location',
+        function (Backend, $location) {
             var self = this;
 
             self.$onInit = function () {
+                self.unread = self.chat.unread;
+
                 Backend.getUserInfo(self.chat.buddyId).then(
                     function (resp) {
                         var avatar = resp.data.avatar;
@@ -19,6 +21,12 @@ angular
                         self.buddyName = resp.data.firstname + " " + resp.data.lastname;
                     }
                 );
+            };
+
+            self.openChat = function () {
+                self.unread = false;
+
+                $location.path('/chat/' + self.chat.id);
             };
         }
     ]
