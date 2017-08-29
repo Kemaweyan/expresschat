@@ -6,9 +6,18 @@ body {
 }
 
 #expresschat {
-    width: 1200px;
+    width: 1000px;
     margin: 0 auto;
     overflow: hidden;
+}
+.panel {
+    margin: 0 10px 0 0;
+}
+.top-container {
+    padding: 10px 0;
+}
+.controls-visible {
+    margin-left: 310px;
 }
 
 fieldset {
@@ -62,12 +71,14 @@ a:hover {
 #form-container {
     padding: 100px 0 0 0;
 }
-#form-container form {
-    margin: 0 auto;
+#form-container form, .panel {
     padding: 20px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     background-color: #fff;
     border-radius: 3px;
+}
+#form-container form {
+    margin: 0 auto;
 }
 #form-container .button-container {
     overflow: hidden;
@@ -109,14 +120,17 @@ a:hover {
 
 #control-panel {
     width: 300px;
-    height: 100%;
+    padding-left: 5px;
     float: left;
 }
 
-#content-view {
-    height: 100%;
+#profile-panel {
+    height: 100px;
+    padding: 10px 20px;
+    overflow: hidden;
 }
-
-.controls-visible {
-    margin-left: 300px;
+#profile-panel .avatar {
+    float: left;
+    width: 100px;
+    height: 100px;
 }
