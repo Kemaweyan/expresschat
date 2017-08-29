@@ -22,6 +22,10 @@ angular
             return sendRequest('GET', '/logout');
         };
 
+        self.getChatList = function () {
+            return sendRequest('GET', '/chats');
+        };
+
         function sendRequest(method, url, data) {
             return $http({
                 method: method,

@@ -9,6 +9,7 @@ const localStrategy = require("passport-local").Strategy;
 const session = require("express-session");
 
 const auth = require("./routes/auth");
+const chat = require("./routes/chat");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(flash());
 app.use(passport.session());
 
 app.use("/", auth);
+app.use("/", chat);
 
 app.use(express.static(path.join(__dirname, 'public')));
 

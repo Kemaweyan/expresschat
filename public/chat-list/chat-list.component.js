@@ -7,8 +7,18 @@ angular
     controller: ['Backend', 'User',
         function (Backend, User) {
             var self = this;
+            self.emptyList = false;
 
-            self.chats = [1, 2, 3];
+            Backend.getChatList().then(
+                function (resp) {
+                    if (resp.data.length > 0) {
+                        self.chats = resp.data;
+                        self.emptyList = false;
+                    } else {
+                        self.emptyList = true;
+                    }
+                }
+            );
         }
     ]
 });

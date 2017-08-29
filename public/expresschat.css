@@ -172,6 +172,12 @@ h2 {
     margin-top: 5px;
     overflow: hidden;
 }
+#chat-list-panel #chat-list .empty-list {
+    margin-top: 20px;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
 #chat-list-panel #user-search {
     margin-top: 10px;
 }
