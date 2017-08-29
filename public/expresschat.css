@@ -75,11 +75,17 @@ a:hover {
     text-decoration: underline;
     color: #1b80de;
 }
-h2 {
+h2, h3 {
     font: bold 16px Verdana;
     margin: 0;
     text-align: center;
     color: #555;
+}
+h3 {
+    text-align: left;
+}
+.avatar img {
+    border: 1px #e0e0e0 solid;
 }
 #form-container {
     padding: 100px 0 0 0;
@@ -153,7 +159,6 @@ h2 {
     width: 100px;
     height: 100px;
     border-radius: 10px;
-    border: 1px #e0e0e0 solid;
 }
 #profile-panel .info {
     margin-left: 102px;
@@ -170,7 +175,7 @@ h2 {
 }
 #chat-list-panel #chat-list {
     margin-top: 5px;
-    overflow: hidden;
+    overflow-y: auto;
 }
 #chat-list-panel #chat-list .empty-list {
     margin-top: 20px;
@@ -192,4 +197,43 @@ h2 {
     text-align: center;
     height: 32px;
     margin-top: 10px;
+}
+#chat-list-panel .chat-item {
+    height: 50px;
+    padding: 3px;
+    border-radius: 5px;
+    margin: 2px 0;
+    border: 1px solid #e0e0e0;
+}
+#chat-list-panel .chat-item .avatar {
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+#chat-list-panel .chat-item .avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 7px;
+}
+#chat-list-panel .chat-item .buddy-info {
+    margin-left: 50px;
+    padding-left: 5px;
+}
+#chat-list-panel .chat-item .links-container {
+    margin-top: 9px;
+    height: 24px;
+    overflow: hidden;
+    font-weight: bold;
+}
+#chat-list-panel .chat-item .left-item {
+    float: left;
+    width: 80px;
+}
+#chat-list-panel .chat-item .right-item {
+    float: right;
+    width: 80px;
+    color: #f00;
+}
+#chat-list-panel .chat-item .middle-item {
+    margin: 0 90px;
 }

@@ -4,8 +4,8 @@ angular
   .module('chatList')
   .component('chatList', {
     templateUrl: "chat-list/chat-list.template.html",
-    controller: ['Backend', 'User',
-        function (Backend, User) {
+    controller: ['Backend',
+        function (Backend) {
             var self = this;
             self.emptyList = false;
 

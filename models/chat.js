@@ -19,13 +19,13 @@ const Chat = new Schema({
     }
 });
 
-Chat.methods.getJSON = function (user_id) {
-    let buddy_id;
-    let unread = (this.unreadBy == user_id);
+Chat.methods.getJSON = function (userId) {
+    let buddyId;
+    let unread = (this.unreadBy == userId);
 
     for (id of this.members) {
-        if (id != user_id) {
-            buddy_id = id;
+        if (id != userId) {
+            buddyId = id;
             break;
         }
     }
@@ -34,7 +34,7 @@ Chat.methods.getJSON = function (user_id) {
         id: this._id,
         members: this.members,
         unread: unread,
-        buddy_id: buddy_id
+        buddyId: buddyId
     };
 };
 

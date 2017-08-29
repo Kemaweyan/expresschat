@@ -26,6 +26,10 @@ angular
             return sendRequest('GET', '/chats');
         };
 
+        self.getUserInfo = function (userId) {
+            return sendRequest('GET', '/users/' + userId);
+        };
+
         function sendRequest(method, url, data) {
             return $http({
                 method: method,

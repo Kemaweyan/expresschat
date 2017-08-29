@@ -1,7 +1,7 @@
 <div id="chat-list-panel" class="panel" full-height="189">
   <h2>MY CHATS</h2>
   <div id="chat-list" class="panel-border" full-height="353">
-    <chat-item ng-repeat="chat in $ctrl.chats" chat-id="{{chat.id}}" buddy-id="{{chat.user_id}}" unread="{{chat.unread}}"></chat-item>
+    <chat-item ng-repeat="chat in $ctrl.chats" chat="chat"></chat-item>
     <div ng-if="$ctrl.emptyList" class="empty-list">There are no chats yet</div>
   </div>
   <div id="user-search">
