@@ -8,6 +8,7 @@ angular
         function (Backend) {
             var self = this;
             self.emptyList = false;
+            self.activeChat = null;
 
             Backend.getChatList().then(
                 function (resp) {

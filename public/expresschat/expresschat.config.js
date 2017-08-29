@@ -17,6 +17,9 @@ angular.module('expressChat')
         })
         .when('/register', {
             template: '<register></register>'
+        })
+        .when('/chat/:chatId', {
+            template: '<chat></chat>'
         }).otherwise('/');
     }
 ]);

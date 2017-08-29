@@ -206,7 +206,7 @@ h3 {
     border: 1px solid #e0e0e0;
     cursor: pointer;
 }
-#chat-list-panel .chat-item:hover {
+#chat-list-panel .chat-item:hover, #chat-list-panel .selected {
     background-color: #e6f3ff;
 }
 #chat-list-panel .unread-chat {

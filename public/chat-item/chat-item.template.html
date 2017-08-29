@@ -1,4 +1,4 @@
-<div class="chat-item" ng-class="{'unread-chat': $ctrl.unread}" ng-click="$ctrl.openChat()">
+<div class="chat-item" ng-class="{'unread-chat': $ctrl.unread, 'selected': $ctrl.activeChat == $ctrl.chat.id}" ng-click="$ctrl.openChat()">
   <div class="avatar">
     <img ng-src="{{$ctrl.buddyAvatar}}" alt="{{$ctrl.buddyName}}'s avatar">
   </div>

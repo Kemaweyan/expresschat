@@ -5,7 +5,8 @@ angular
   .component('chatItem', {
     templateUrl: "chat-item/chat-item.template.html",
     bindings: {
-        chat: "<"
+        chat: "<",
+        activeChat: "="
     },
     controller: ['Backend', '$location',
         function (Backend, $location) {
@@ -25,6 +26,7 @@ angular
 
             self.openChat = function () {
                 self.unread = false;
+                self.activeChat = self.chat.id;
 
                 $location.path('/chat/' + self.chat.id);
             };
