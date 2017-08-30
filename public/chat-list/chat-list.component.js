@@ -8,6 +8,7 @@ angular
         function (ChatList) {
             var self = this;
             self.chats = ChatList.chats;
+            ChatList.start();
         }
     ]
 });

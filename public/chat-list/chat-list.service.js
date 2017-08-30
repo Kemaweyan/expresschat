@@ -2,10 +2,11 @@
 
 angular
   .module('chatList')
-  .service('ChatList', ['Backend', '$timeout',
-    function (Backend, $timeout) {
+  .service('ChatList', ['Backend', '$interval', '$rootScope',
+    function (Backend, $interval, $rootScope) {
         var self = this;
         self.chats = [];
+        var promise;
 
         var getChatList = function () {
             Backend.getChatList().then(
@@ -23,15 +24,26 @@ angular
                             }
                         }
                     });
-
-                    $timeout(getChatList, 2000);
                 },
                 function (resp) {
-                    
+
                 }
             );
         };
 
-        getChatList();
+        self.start = function () {
+            getChatList();
+            promise = $interval(getChatList, 2000);
+        }
+
+        self.stop = function () {
+            $interval.cancel(promise);
+        };
+
+        $rootScope.$watch('authorized', function () {
+            if (!$rootScope.authorized) {
+                self.stop();
+            }
+        });
     }
 ]);
