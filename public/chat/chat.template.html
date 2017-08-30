@@ -1,1 +1,19 @@
-<div></div>
+<div id="chat-container">
+  <div id="buddy-panel">
+    <div class="avatar">
+      <img ng-src="{{$ctrl.buddyAvatar}}" alt="{{$ctrl.buddyName}}'s avatar">
+    </div>
+    <h1>Chat with {{$ctrl.buddyName}}</h1>
+  </div>
+  <div id="post-list" class="panel-border" full-height="308">
+    <div ng-repeate="post in $ctrl.posts" class="post">
+      
+    </div>
+  </div>
+  <div id="add-post">
+    <form>
+      <textarea></textarea>
+      <div class="submit"><input type="submit" id="submit-post" value="SEND"></div>
+    </form>
+  </div>
+</div>
