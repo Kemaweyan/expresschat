@@ -25,11 +25,12 @@ app.use(passport.initialize());
 app.use(flash());
 app.use(passport.session());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use("/", auth);
 app.use("/", chats);
 app.use("/", users);
 
-app.use(express.static(path.join(__dirname, 'public')));
 
 const User = require("./models/user");
 passport.use(new localStrategy(User.authenticate()));

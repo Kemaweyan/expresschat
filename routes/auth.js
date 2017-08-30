@@ -22,16 +22,6 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/login',
     });
 });
 
-router.get('/logout', (req, res, next) => {
-    req.logout();
-    req.session.save((err) => {
-        if (err) {
-            return next(err);
-        }
-        res.redirect('/login');
-    });
-});
-
 router.post('/register', (req, res) => {
     User.register(User.createFromJSON(req.body), req.body.password, (err, user, next) => {
         if (err) {
@@ -46,6 +36,25 @@ router.post('/register', (req, res) => {
                 res.redirect('/login');
             });
         });
+    });
+});
+
+router.use((req, res, next) => {
+    if (!req.user) {
+        let err = new Error("Not authorized");
+        err.status = 401;
+        return next(err);
+    }
+    next();
+});
+
+router.get('/logout', (req, res, next) => {
+    req.logout();
+    req.session.save((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/login');
     });
 });
 

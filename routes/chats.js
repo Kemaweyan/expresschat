@@ -6,12 +6,6 @@ const Post = require("../models/post");
 const router = express.Router();
 
 router.get('/chats', (req, res, next) => {
-    if (!req.user) {
-        let err = new Error("Not authorized");
-        err.status = 401;
-        return next(err);
-    }
-
     Chat.find({members: req.user._id}, (err, docs) => {
         if (err) {
             next(err);
@@ -28,12 +22,6 @@ router.get('/chats', (req, res, next) => {
 });
 
 router.post('/chats', (req, res, next) => {
-    if (!req.user) {
-        let err = new Error("Not authorized");
-        err.status = 401;
-        return next(err);
-    }
-
     let chatIdPromise = new Promise((resolve, reject) => {
         let findPromise = Chat.findOrCreate({
             $and: [
@@ -86,12 +74,6 @@ router.post('/chats', (req, res, next) => {
 });
 
 router.get('/chats/:chatId/:skip*?', (req, res, next) => {
-    if (!req.user) {
-        let err = new Error("Not authorized");
-        err.status = 401;
-        return next(err);
-    }
-
     let chatPromise = Chat.findById(req.params.chatId).where({
         members: req.user._id
     }).exec();
@@ -121,6 +103,10 @@ router.get('/chats/:chatId/:skip*?', (req, res, next) => {
     }, (err) => {
         return next(err);
     });
+});
+
+router.get('/test', (req, res) => {
+    res.send("It works!\n");
 });
 
 module.exports = router;
