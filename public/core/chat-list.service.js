@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('chatList')
+  .module('core')
   .service('ChatList', ['Backend', '$interval', '$rootScope',
     function (Backend, $interval, $rootScope) {
         var self = this;
@@ -29,6 +29,12 @@ angular
 
                 }
             );
+        };
+
+        self.getChat = function (chatId) {
+            return self.chats.find(function (element, index, array) {
+                return element.id == chatId;
+            });
         };
 
         self.start = function () {
