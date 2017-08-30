@@ -5,12 +5,12 @@ angular
   .component('chatItem', {
     templateUrl: "chat-list/chat-item.template.html",
     bindings: {
-        chat: "<",
-        activeChat: "="
+        chat: "<"
     },
-    controller: ['Backend', '$location',
-        function (Backend, $location) {
+    controller: ['Backend', 'Chat',
+        function (Backend, Chat) {
             var self = this;
+            self.activeChat = Chat.activeChat;
 
             self.$onInit = function () {
                 self.unread = self.chat.unread;
@@ -26,9 +26,7 @@ angular
 
             self.openChat = function () {
                 self.unread = false;
-                self.activeChat = self.chat.id;
-
-                $location.path('/chat/' + self.chat.id);
+                Chat.open(self.chat.id);
             };
         }
     ]
