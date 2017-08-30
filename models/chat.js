@@ -38,4 +38,10 @@ Chat.methods.getJSON = function (userId) {
     };
 };
 
+Chat.statics.createChat = function (data) {
+    return new this({
+        members: [data.authorId, data.buddyId]
+    });
+};
+
 module.exports = mongoose.model('chats', Chat);
