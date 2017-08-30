@@ -13,8 +13,6 @@ angular
             self.activeChat = Chat.activeChat;
 
             self.$onInit = function () {
-                self.unread = self.chat.unread;
-
                 Backend.getUserInfo(self.chat.buddyId).then(
                     function (resp) {
                         var avatar = resp.data.avatar;
@@ -25,7 +23,7 @@ angular
             };
 
             self.openChat = function () {
-                self.unread = false;
+                self.chat.unread = false;
                 Chat.open(self.chat.id);
             };
         }
