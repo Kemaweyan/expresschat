@@ -35,10 +35,6 @@ router.post('/chats', (req, res, next) => {
     }
 
     let chatIdPromise = new Promise((resolve, reject) => {
-        if (req.body.chatId) {
-            return resolve(req.body.chatId);
-        }
-
         let findPromise = Chat.findOrCreate({
             $and: [
                 {members: req.user._id},
@@ -89,8 +85,42 @@ router.post('/chats', (req, res, next) => {
     });
 });
 
-router.get('/chats/:chatId', (req, res, next) => {
-    
+router.get('/chats/:chatId/:skip*?', (req, res, next) => {
+    if (!req.user) {
+        let err = new Error("Not authorized");
+        err.status = 401;
+        return next(err);
+    }
+
+    let chatPromise = Chat.findById(req.params.chatId).where({
+        members: req.user._id
+    }).exec();
+
+    chatPromise.then((chat) => {
+        if (!chat) {
+            let err = new Error("Forbidden");
+            err.status = 403;
+            return next(err);
+        }
+
+        let query = Post.find({chat: req.params.chatId});
+
+        if (req.params.skip) {
+            query = query.skip(req.params.skip);
+        }
+
+        query = query.limit(20).sort("date");
+
+        let postsPromise = query.exec();
+
+        postsPromise.then((posts) => {
+            res.send(posts);
+        }, (err) => {
+            return next(err);
+        });
+    }, (err) => {
+        return next(err);
+    });
 });
 
 module.exports = router;
