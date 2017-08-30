@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const findOrCreate = require("mongoose-findorcreate");
 const Schema = mongoose.Schema;
 
 const User = require("./user");
@@ -9,8 +10,7 @@ const Chat = new Schema({
             type: Schema.Types.ObjectId,
             ref: User,
             required: true,
-            index: true,
-            unique: true
+            index: true
         }
     ],
     unreadBy: {
@@ -18,6 +18,8 @@ const Chat = new Schema({
         ref: User
     }
 });
+
+Chat.plugin(findOrCreate);
 
 Chat.methods.getJSON = function (userId) {
     let buddyId;
@@ -36,12 +38,6 @@ Chat.methods.getJSON = function (userId) {
         unread: unread,
         buddyId: buddyId
     };
-};
-
-Chat.statics.createChat = function (data) {
-    return new this({
-        members: [data.authorId, data.buddyId]
-    });
 };
 
 module.exports = mongoose.model('chats', Chat);

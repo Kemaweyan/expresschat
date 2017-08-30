@@ -28,51 +28,65 @@ router.get('/chats', (req, res, next) => {
 });
 
 router.post('/chats', (req, res, next) => {
-    /*if (!req.user) {
+    if (!req.user) {
         let err = new Error("Not authorized");
         err.status = 401;
         return next(err);
-    }*/
+    }
 
-    let chatId = req.body.chatId;
+    let chatIdPromise = new Promise((resolve, reject) => {
+        if (req.body.chatId) {
+            return resolve(req.body.chatId);
+        }
 
-    if (!chatId) {
+        let findPromise = Chat.findOrCreate({
+            $and: [
+                {members: req.user._id},
+                {members: req.body.buddyId}
+            ]
+        });
+
+        findPromise.then((result) => {
+            let newChat = result.doc;
+
+            if (result.created) {
+                newChat.members = [
+                    req.user._id,
+                    req.body.buddyId
+                ];
+                newChat.save();
+            }
+
+            resolve(newChat._id);
+        },
+        (err) => {
+            reject(err);
+        });
+    });
+
+    chatIdPromise.then((chatId) => {
+        let date = new Date(Date.now());
+
         let data = {
-            //authorId: req.user._id,
-            authorId: "59a5556822037910117a4fc2",
-            buddyId: req.body.buddyId
+            chatId: chatId,
+            authorId: req.user._id,
+            text: req.body.text,
+            date: date.toJSON()
         };
 
-        let chat = Chat.createChat(data);
+        let post = Post.createPost(data);
 
-        chat.save((err) => {
+        post.save((err) => {
             if (err) {
                 return next(err);
             }
 
-            chatId = chat._id;
-
-            let date = new Date(Date.now());
-
-            let data = {
-                chatId: chatId,
-                //authorId: req.user._id,
-                authorId: "59a5556822037910117a4fc2",
-                text: req.body.text,
-                date: date.toJSON()
-            };
-
-            let post = Post.createPost(data);
-
-            post.save((err) => {
-                if (err) {
-                    return next(err);
-                }
-
-                res.send(post.getJSON());
-            });
+            res.send(post.getJSON());
         });
-    }
+    },
+    (err) => {
+        return next(err);
+    });
 });
 
 router.get('/chats/:chatId', (req, res, next) => {
