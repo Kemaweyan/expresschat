@@ -1,9 +1,9 @@
 'use strict';
 
 angular
-  .module('chatItem')
+  .module('chatList')
   .component('chatItem', {
-    templateUrl: "chat-item/chat-item.template.html",
+    templateUrl: "chat-list/chat-item.template.html",
     bindings: {
         chat: "<",
         activeChat: "="

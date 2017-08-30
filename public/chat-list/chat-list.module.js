@@ -1,5 +1,6 @@
 'use strict';
 
 angular.module('chatList', [
-    'core'
+    'core',
+    'chat'
 ]);
