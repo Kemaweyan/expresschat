@@ -30,7 +30,8 @@ angular
                     function (resp) {
                         User.setUser(resp.data);
                         $location.path('/');
-                    }, function (resp) {
+                    },
+                    function (resp) {
                         self.error = resp.data.error;
                         self.password = "";
                         self.confirm = "";

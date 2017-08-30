@@ -23,7 +23,9 @@ angular
                     User.resetUser();
                     return resp;
                 },
-                function (resp) {}
+                function (resp) {
+                    
+                }
             );
         };
     }

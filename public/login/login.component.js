@@ -18,17 +18,20 @@ angular
                     password: self.password
                 };
 
-                Backend.postLoginData(data).then(function (resp) {
-                    User.setUser(resp.data);
-                    $location.path('/');
-                }, function (resp) {
-                    if (resp.status == 401) {
-                        self.error = resp.data.error.join(", ");
-                    } else {
-                        self.error = resp.data.error;
+                Backend.postLoginData(data).then(
+                    function (resp) {
+                        User.setUser(resp.data);
+                        $location.path('/');
+                    },
+                    function (resp) {
+                        if (resp.status == 401) {
+                            self.error = resp.data.error.join(", ");
+                        } else {
+                            self.error = resp.data.error;
+                        }
+                        self.password = "";
                     }
-                    self.password = "";
-                });
+                );
             };
         }
     ]
