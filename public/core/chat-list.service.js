@@ -33,7 +33,7 @@ angular
 
         self.start = function () {
             getChatList();
-            intervalPromise = $interval(getChatList, 2000);
+            intervalPromise = $interval(getChatList, 1000);
         }
 
         self.stop = function () {
