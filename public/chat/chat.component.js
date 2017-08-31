@@ -4,26 +4,23 @@ angular
   .module('chat')
   .component('chat', {
     templateUrl: "chat/chat.template.html",
-    controller: ['$routeParams', 'Chat', 'ChatList', 'Backend',
-        function ($routeParams, Chat, ChatList, Backend) {
+    controller: ['$routeParams', 'Chat',
+        function ($routeParams, Chat) {
             var self = this;
-            var chat = ChatList.getChat($routeParams.chatId);
 
             self.posts = Chat.posts;
-            Chat.setActiveChat(chat);
-            Chat.start();
+            Chat.setActiveChat($routeParams.chatId);
+            Chat.start().then(
+                function (chat) {
+                    var avatar = chat.buddy.avatar;
+                    self.buddyAvatar = avatar ? "/images/avatars/100/" + avatar : "/images/100/no-avatar.png";
+                    self.buddyName = chat.buddy.firstname + " " + chat.buddy.lastname;
+                }
+            );
 
             self.submit = function () {
                 
             };
-
-            Chat.getBuddyInfo().then(
-                function (buddy) {
-                    var avatar = buddy.avatar;
-                    self.buddyAvatar = avatar ? "/images/avatars/100/" + avatar : "/images/100/no-avatar.png";
-                    self.buddyName = buddy.firstname + " " + buddy.lastname;
-                }
-            );
         }
     ]
 });

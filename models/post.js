@@ -7,13 +7,13 @@ const Chat = require("./chat");
 const Post = new Schema({
     chat: {
         type: Schema.Types.ObjectId,
-        ref: Chat,
+        ref: 'chats',
         required: true,
         index: true
     },
     author: {
         type: Schema.Types.ObjectId,
-        ref: User,
+        ref: 'users',
         required: true
     },
     text: {

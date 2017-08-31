@@ -5,54 +5,43 @@ angular
   .service('Chat', ['Backend', '$location', '$rootScope', '$interval',
     function (Backend, $location, $rootScope, $interval) {
         var self = this;
-        self.chat = null;
-        self.buddy = null;
         self.activeChat = {id: null};
+        self.chat = null;
         self.posts = [];
-        var promise;
+        var intervalPromise;
 
         self.open = function (id) {
             $location.path('/chat/' + id);
         };
 
-        self.setActiveChat = function (chat) {
-            self.activeChat.id = chat.id;
-            self.chat = chat;
+        self.setActiveChat = function (id) {
+            self.activeChat.id = id;
         }
 
         $rootScope.$on('$routeChangeStart', function (event, current, previous, reject) {
             if (current.$$route.originalPath != "/chat/:chatId") {
                 self.activeChat.id = null;
                 self.chat = null;
-                self.buddy = null;
             }
+            self.stop();
         });
 
         self.start = function () {
-            getPostList();
-            promise = $interval(getPostList, 1000);
+            var promise = getPostList();
+            intervalPromise = $interval(getPostList, 1000);
+            return promise;
         };
 
         self.stop = function () {
-            $interval.cancel(promise);
-        };
-
-        self.getBuddyInfo = function () {
-            return Backend.getUserInfo(self.chat.buddyId).then(
-                function (resp) {
-                    self.buddy = resp.data;
-                    return self.buddy;
-                },
-                function (resp) {
-
-                }
-            );
+            $interval.cancel(intervalPromise);
         };
 
         function getPostList() {
-            Backend.getChat(self.chat.id).then(
+            return Backend.getChat(self.activeChat.id).then(
                 function (resp) {
-                    resp.data.forEach(function (current, index, array) {
+                    self.chat = resp.data.chat;
+                    var posts = resp.data.posts;
+                    posts.forEach(function (current, index, array) {
                         var postIndex = self.posts.findIndex(function (element, index, array) {
                             return element.id == current.id;
                         });
@@ -61,6 +50,7 @@ angular
                             self.posts.push(current);
                         }
                     });
+                    return self.chat;
                 },
                 function (resp) {
 

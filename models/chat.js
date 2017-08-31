@@ -8,7 +8,7 @@ const Chat = new Schema({
     members: [
         {
             type: Schema.Types.ObjectId,
-            ref: User,
+            ref: 'users',
             required: true,
             index: true
         }
@@ -21,23 +21,29 @@ const Chat = new Schema({
 
 Chat.plugin(findOrCreate);
 
+Chat.methods.isUnread = function (userId) {
+    return this.unreadBy && this.unreadBy.equals(userId);
+};
+
 Chat.methods.getJSON = function (userId) {
     let buddyId;
-    let unread = (this.unreadBy == userId);
 
-    for (id of this.members) {
-        if (id != userId) {
-            buddyId = id;
-            break;
-        }
-    }
+    let buddy = this.members.find((element, index, array) => {
+        return element._id != userId;
+    });
 
     return {
         id: this._id,
-        members: this.members,
-        unread: unread,
-        buddyId: buddyId
+        unread: this.isUnread(),
+        buddy: buddy
     };
+};
+
+Chat.methods.markRead = function (userId) {
+    if (this.isUnread()) {
+        this.unreadBy = null;
+        this.save();
+    }
 };
 
 module.exports = mongoose.model('chats', Chat);

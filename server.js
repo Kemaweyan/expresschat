@@ -8,6 +8,11 @@ const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const session = require("express-session");
 
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/expresschat', {useMongoClient: true});
+
+const User = require("./models/user");
+
 const auth = require("./routes/auth");
 const chats = require("./routes/chats");
 const users = require("./routes/users");
@@ -31,14 +36,9 @@ app.use("/", auth);
 app.use("/", chats);
 app.use("/", users);
 
-
-const User = require("./models/user");
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/expresschat', {useMongoClient: true});
 
 app.use((err, req, res, next) => {
     res.status(err.status || 500).send({error: err.message});

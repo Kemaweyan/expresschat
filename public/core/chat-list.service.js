@@ -6,7 +6,7 @@ angular
     function (Backend, $interval, $rootScope) {
         var self = this;
         self.chats = [];
-        var promise;
+        var intervalPromise;
 
         var getChatList = function () {
             Backend.getChatList().then(
@@ -31,19 +31,13 @@ angular
             );
         };
 
-        self.getChat = function (chatId) {
-            return self.chats.find(function (element, index, array) {
-                return element.id == chatId;
-            });
-        };
-
         self.start = function () {
             getChatList();
-            promise = $interval(getChatList, 2000);
+            intervalPromise = $interval(getChatList, 2000);
         }
 
         self.stop = function () {
-            $interval.cancel(promise);
+            $interval.cancel(intervalPromise);
         };
 
         $rootScope.$watch('authorized', function () {

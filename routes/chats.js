@@ -6,19 +6,16 @@ const Post = require("../models/post");
 const router = express.Router();
 
 router.get('/chats', (req, res, next) => {
-    Chat.find({members: req.user._id}, (err, docs) => {
-        if (err) {
+    Chat.find({members: req.user._id})
+        .populate('members')
+        .then((docs) => {
+            res.send(docs.map((chat) => {
+                return chat.getJSON(req.user._id);
+            }));
+        },
+        (err) => {
             next(err);
-        }
-
-        let chatList = [];
-
-        for (chat of docs) {
-            chatList.push(chat.getJSON(req.user._id));
-        }
-
-        res.send(chatList);
-    });
+        });
 });
 
 router.post('/chats', (req, res, next) => {
@@ -38,8 +35,9 @@ router.post('/chats', (req, res, next) => {
                     req.user._id,
                     req.body.buddyId
                 ];
-                newChat.save();
             }
+            newChat.unreadBy = req.body.buddyId;
+            newChat.save();
 
             resolve(newChat._id);
         },
@@ -76,7 +74,7 @@ router.post('/chats', (req, res, next) => {
 router.get('/chats/:chatId/:skip*?', (req, res, next) => {
     let chatPromise = Chat.findById(req.params.chatId).where({
         members: req.user._id
-    }).exec();
+    }).populate('members').exec();
 
     chatPromise.then((chat) => {
         if (!chat) {
@@ -84,6 +82,8 @@ router.get('/chats/:chatId/:skip*?', (req, res, next) => {
             err.status = 403;
             return next(err);
         }
+
+        chat.markRead(req.user._id);
 
         let query = Post.find({chat: req.params.chatId});
 
@@ -96,17 +96,18 @@ router.get('/chats/:chatId/:skip*?', (req, res, next) => {
         let postsPromise = query.exec();
 
         postsPromise.then((posts) => {
-            res.send(posts);
+            res.send({
+                chat: chat.getJSON(),
+                posts: posts.map((post) => {
+                    return post.getJSON();
+                })
+            });
         }, (err) => {
             return next(err);
         });
     }, (err) => {
         return next(err);
     });
-});
-
-router.get('/test', (req, res) => {
-    res.send("It works!\n");
 });
 
 module.exports = router;
