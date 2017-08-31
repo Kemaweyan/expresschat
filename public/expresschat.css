@@ -286,20 +286,21 @@ h3 {
     border-radius: 0 30px 0 0;
     background-color: #fafafa;
 }
-#chat-container .post .text {
+#chat-container .post .post-body {
     min-width: 120px;
     max-width: 400px;
-    min-height: 50px;
     float: left;
     padding: 5px;
     border-radius: 0 10px 10px 10px; 
     background-color: #f2f46f;
 }
+#chat-container .post .post-body .text {
+    min-height: 30px;
+}
 #chat-container .post .time {
-    margin: 2px 0 0 69px;
     font: 10px Arial;
-    float: left;
-    color: #999;
+    color: #777;
+    text-align: right; 
 }
 #chat-container .local-post .avatar {
     float: right;
@@ -312,14 +313,10 @@ h3 {
 #chat-container .local-post .tail .circle {
     border-radius: 30px 0 0 0;
 }
-#chat-container .local-post .text {
+#chat-container .local-post .post-body {
     float: right;
     border-radius: 10px 0 10px 10px; 
     background-color: #c6e0f8;
-}
-#chat-container .local-post .time {
-    margin: 2px 69px 0 0;
-    float: right;
 }
 #chat-container #add-post {
     margin-top: 5px;

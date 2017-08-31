@@ -36,6 +36,20 @@ angular
             $interval.cancel(intervalPromise);
         };
 
+        function getPostTime(post) {
+            var date = new Date(post.date);
+            var now = new Date();
+
+            if (date.getDate() == now.getDate() &&
+                date.getMonth() == now.getMonth() &&
+                date.getYear() == now.getYear()) {
+
+                return date.toLocaleTimeString("ru");
+            }
+
+            return date.toLocaleString("ru");
+        }
+
         function getPostList() {
             return Backend.getChat(self.activeChat.id).then(
                 function (resp) {
@@ -48,7 +62,7 @@ angular
 
                         if (postIndex < 0) {
                             post.isLocal = post.authorId == User.id;
-                            post.time = new Date(post.date).toLocaleString("ru");
+                            post.time = getPostTime(post);
                             self.posts.push(post);
                         }
                     });
