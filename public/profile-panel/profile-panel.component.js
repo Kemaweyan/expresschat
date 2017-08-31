@@ -7,9 +7,7 @@ angular
     controller: ['$location', 'Auth', 'User',
         function ($location, Auth, User) {
             var self = this;
-
-            self.userName = User.firstName + " " + User.lastName;
-            self.avatar = User.avatar ? "/images/avatars/100/" + User.avatar : "/images/100/no-avatar.png";
+            self.user = User;
 
             self.logout = function () {
                 Auth.logout().then(function (resp) {

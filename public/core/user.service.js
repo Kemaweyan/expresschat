@@ -13,7 +13,15 @@ angular
             self.firstName = data.firstname;
             self.lastName = data.lastname;
             self.email = data.email;
-            self.avatar = data.avatar;
+            if (data.avatar) {
+                self.smallAvatar = "/images/avatars/32/" + data.avatar;
+                self.mediumAvatar = "/images/avatars/48/" + data.avatar;
+                self.largeAvatar = "/images/avatars/100/" + data.avatar;
+            } else {
+                self.smallAvatar = "/images/32/no-avatar.png";
+                self.mediumAvatar = "/images/48/no-avatar.png";
+                self.largeAvatar = "/images/100/no-avatar.png";
+            }
         };
 
         self.resetUser = function () {
@@ -23,7 +31,9 @@ angular
             self.firstName = null;
             self.lastName = null;
             self.email = null;
-            self.avatar = null;
+            self.smallAvatar = null;
+            self.mediumAvatar = null;
+            self.largeAvatar = null;
         };
 
         self.resetUser();

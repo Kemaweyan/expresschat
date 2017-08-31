@@ -7,6 +7,7 @@ angular
     controller: ['$routeParams', 'Chat', 'User',
         function ($routeParams, Chat, User) {
             var self = this;
+            self.user = User;
 
             self.posts = Chat.posts;
             Chat.setActiveChat($routeParams.chatId);
@@ -18,8 +19,6 @@ angular
                     self.buddyName = chat.buddy.firstname + " " + chat.buddy.lastname;
                 }
             );
-
-            self.userSmallAvatar = User.avatar ? "/images/avatars/32/" + User.avatar : "/images/32/no-avatar.png";
 
             self.submit = function () {
                 if (self.text) {
