@@ -71,6 +71,7 @@ angular
                 function (resp) {
                     self.chat = resp.data.chat;
                     var posts = resp.data.posts;
+                    posts.reverse();
                     posts.forEach(function (post, index, array) {
                         var postIndex = self.posts.findIndex(function (element, index, array) {
                             return element.id == post.id;
@@ -89,5 +90,27 @@ angular
                 }
             );
         }
+
+        self.getPreviousPostList = function() {
+            return Backend.getChat(self.activeChat.id, self.posts.length).then(
+                function (resp) {
+                    var posts = resp.data.posts;
+                    posts.forEach(function (post, index, array) {
+                        var postIndex = self.posts.findIndex(function (element, index, array) {
+                            return element.id == post.id;
+                        });
+
+                        if (postIndex < 0) {
+                            post.isLocal = post.authorId == User.id;
+                            post.time = getPostTime(post);
+                            self.posts.unshift(post);
+                        }
+                    });
+                },
+                function (resp) {
+
+                }
+            );
+        };
     }
 ]);

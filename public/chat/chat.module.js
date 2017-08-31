@@ -1,5 +1,6 @@
 'use strict';
 
 angular.module('chat', [
-    'core'
+    'core',
+    'luegg.directives'
 ]);

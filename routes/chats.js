@@ -91,7 +91,7 @@ router.get('/chats/:chatId/:skip*?', (req, res, next) => {
             query = query.skip(req.params.skip);
         }
 
-        query = query.limit(20).sort("date");
+        query = query.sort("-date").limit(20);
 
         let postsPromise = query.exec();
 

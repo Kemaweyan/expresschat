@@ -27,6 +27,10 @@ angular
                     self.text = "";
                 }
             };
+
+            self.scrollToTop = function () {
+                Chat.getPreviousPostList();
+            }
         }
     ]
 });

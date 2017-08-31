@@ -5,8 +5,8 @@
     </div>
     <h1>Chat with {{$ctrl.buddyName}}</h1>
   </div>
-  <div id="post-list" class="panel-border" full-height="308">
-    <div ng-repeat="post in $ctrl.posts" class="post" ng-class="{'local-post': post.isLocal}">
+  <div id="post-list" class="panel-border" full-height="308" scroll-glue scroll-to-top="$ctrl.scrollToTop()">
+    <div ng-repeat="post in $ctrl.posts" class="post" id="{{post.id}}" ng-class="{'local-post': post.isLocal}">
       <div class="avatar">
         <img ng-src="{{post.isLocal && $ctrl.userSmallAvatar || $ctrl.buddySmallAvatar}}" alt="Avatar">
       </div>
