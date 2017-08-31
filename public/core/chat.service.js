@@ -36,6 +36,22 @@ angular
             $interval.cancel(intervalPromise);
         };
 
+        self.send = function (text) {
+            var data = {
+                text: text,
+                buddyId: self.chat.buddy
+            };
+
+            Backend.postNewMessage(data).then(
+                function (resp) {
+                    
+                },
+                function (resp) {
+                    
+                }
+            );
+        };
+
         function getPostTime(post) {
             var date = new Date(post.date);
             var now = new Date();

@@ -22,7 +22,9 @@ angular
             self.userSmallAvatar = User.avatar ? "/images/avatars/32/" + User.avatar : "/images/32/no-avatar.png";
 
             self.submit = function () {
-                
+                Chat.send(self.text);
+
+                self.text = "";
             };
         }
     ]

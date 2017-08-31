@@ -38,6 +38,10 @@ angular
             return sendRequest('GET', '/users/' + userId);
         };
 
+        self.postNewMessage = function (data) {
+            return sendRequest('POST', '/chats', data);
+        };
+
         function sendRequest(method, url, data) {
             return $http({
                 method: method,
