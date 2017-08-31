@@ -26,7 +26,7 @@
   </div>
   <div id="add-post">
     <form ng-submit="$ctrl.submit()">
-      <textarea ng-model="$ctrl.text" required></textarea>
+      <textarea ng-model="$ctrl.text" press-enter="$ctrl.submit()" required></textarea>
       <div class="submit"><input type="submit" id="submit-post" value="SEND"></div>
     </form>
   </div>
