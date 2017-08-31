@@ -19,7 +19,7 @@ angular
         }
 
         $rootScope.$on('$routeChangeStart', function (event, current, previous, reject) {
-            if (current.$$route.originalPath != "/chat/:chatId") {
+            if (!current.$$route || current.$$route.originalPath != "/chat/:chatId") {
                 self.activeChat.id = null;
                 self.chat = null;
             }
