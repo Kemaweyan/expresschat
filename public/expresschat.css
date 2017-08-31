@@ -88,6 +88,9 @@ h3 {
 .avatar img {
     border: 1px #e0e0e0 solid;
 }
+.end-container {
+    clear: both;
+}
 #form-container {
     padding: 100px 0 0 0;
 }
@@ -257,6 +260,66 @@ h3 {
 #chat-container #post-list {
     background-color: #fafafa;
     overflow: auto;
+}
+#chat-container .post {
+    margin-top: 10px;
+}
+#chat-container .post .avatar {
+    float: left;
+    width: 34px;
+}
+#chat-container .post .avatar img {
+    width: 34px;
+    height: 34px;
+    border-radius: 5px;
+}
+#chat-container .post .tail {
+    float: left;
+    width: 20px;
+    height: 30px;
+    background-color: #f2f46f;
+    margin-left: 5px;
+}
+#chat-container .post .tail .circle {
+    width: 20px;
+    height: 30px;
+    border-radius: 0 30px 0 0;
+    background-color: #fafafa;
+}
+#chat-container .post .text {
+    min-width: 120px;
+    max-width: 400px;
+    min-height: 50px;
+    float: left;
+    padding: 5px;
+    border-radius: 0 10px 10px 10px; 
+    background-color: #f2f46f;
+}
+#chat-container .post .time {
+    margin: 2px 0 0 69px;
+    font: 10px Arial;
+    float: left;
+    color: #999;
+}
+#chat-container .local-post .avatar {
+    float: right;
+}
+#chat-container .local-post .tail {
+    float: right;
+    background-color: #c6e0f8;
+    margin: 0 5px 0 0;
+}
+#chat-container .local-post .tail .circle {
+    border-radius: 30px 0 0 0;
+}
+#chat-container .local-post .text {
+    float: right;
+    border-radius: 10px 0 10px 10px; 
+    background-color: #c6e0f8;
+}
+#chat-container .local-post .time {
+    margin: 2px 69px 0 0;
+    float: right;
 }
 #chat-container #add-post {
     margin-top: 5px;

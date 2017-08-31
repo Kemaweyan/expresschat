@@ -29,7 +29,6 @@ const Post = new Schema({
 Post.methods.getJSON = function () {
     return {
         id: this._id,
-        chatId: this.chat,
         authorId: this.author,
         text: this.text,
         date: this.date.toJSON()

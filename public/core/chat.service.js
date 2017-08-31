@@ -2,8 +2,8 @@
 
 angular
   .module('core')
-  .service('Chat', ['Backend', '$location', '$rootScope', '$interval',
-    function (Backend, $location, $rootScope, $interval) {
+  .service('Chat', ['Backend', 'User', '$location', '$rootScope', '$interval',
+    function (Backend, User, $location, $rootScope, $interval) {
         var self = this;
         self.activeChat = {id: null};
         self.chat = null;
@@ -41,13 +41,15 @@ angular
                 function (resp) {
                     self.chat = resp.data.chat;
                     var posts = resp.data.posts;
-                    posts.forEach(function (current, index, array) {
+                    posts.forEach(function (post, index, array) {
                         var postIndex = self.posts.findIndex(function (element, index, array) {
-                            return element.id == current.id;
+                            return element.id == post.id;
                         });
 
                         if (postIndex < 0) {
-                            self.posts.push(current);
+                            post.isLocal = post.authorId == User.id;
+                            post.time = new Date(post.date).toLocaleString("ru");
+                            self.posts.push(post);
                         }
                     });
                     return self.chat;

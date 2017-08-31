@@ -6,8 +6,21 @@
     <h1>Chat with {{$ctrl.buddyName}}</h1>
   </div>
   <div id="post-list" class="panel-border" full-height="308">
-    <div ng-repeat="post in $ctrl.posts" class="post">
-      {{post.text}}
+    <div ng-repeat="post in $ctrl.posts" class="post" ng-class="{'local-post': post.isLocal}">
+      <div class="avatar">
+        <img ng-src="{{post.isLocal && $ctrl.userSmallAvatar || $ctrl.buddySmallAvatar}}" alt="Avatar">
+      </div>
+      <div class="tail">
+        <div class="circle"></div>
+      </div>
+      <div class="text">
+        {{post.text}}
+      </div>
+      <div class="end-container"></div>
+      <div class="time">
+        {{post.time}}
+      </div>
+      <div class="end-container"></div>
     </div>
   </div>
   <div id="add-post">
