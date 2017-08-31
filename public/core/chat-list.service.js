@@ -11,16 +11,16 @@ angular
         var getChatList = function () {
             Backend.getChatList().then(
                 function (resp) {
-                    resp.data.forEach(function (current, index, array) {
+                    resp.data.forEach(function (chat, index, array) {
                         var chatIndex = self.chats.findIndex(function (element, index, array) {
-                            return element.id == current.id;
+                            return element.id == chat.id;
                         });
 
                         if (chatIndex < 0) {
-                            self.chats.push(current);
+                            self.chats.push(chat);
                         } else {
-                            if (current.unread != self.chats[index].unread) {
-                                self.chats[index].unread = current.unread;
+                            if (chat.unread != self.chats[index].unread) {
+                                self.chats[index].unread = chat.unread;
                             }
                         }
                     });

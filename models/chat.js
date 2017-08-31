@@ -34,13 +34,13 @@ Chat.methods.getJSON = function (userId) {
 
     return {
         id: this._id,
-        unread: this.isUnread(),
+        unread: this.isUnread(userId),
         buddy: buddy
     };
 };
 
 Chat.methods.markRead = function (userId) {
-    if (this.isUnread()) {
+    if (this.isUnread(userId)) {
         this.unreadBy = null;
         this.save();
     }
