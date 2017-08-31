@@ -8,7 +8,7 @@ angular
         self.chat = null;
         self.buddy = null;
         self.activeChat = {id: null};
-        self.chats = [];
+        self.posts = [];
         var promise;
 
         self.open = function (id) {
@@ -50,7 +50,22 @@ angular
         };
 
         function getPostList() {
-            
+            Backend.getChat(self.chat.id).then(
+                function (resp) {
+                    resp.data.forEach(function (current, index, array) {
+                        var postIndex = self.posts.findIndex(function (element, index, array) {
+                            return element.id == current.id;
+                        });
+
+                        if (postIndex < 0) {
+                            self.posts.push(current);
+                        }
+                    });
+                },
+                function (resp) {
+
+                }
+            );
         }
     }
 ]);

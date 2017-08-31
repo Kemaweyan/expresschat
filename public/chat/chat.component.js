@@ -9,11 +9,7 @@ angular
             var self = this;
             var chat = ChatList.getChat($routeParams.chatId);
 
-            if (!chat) {
-                console.log("chat not found");
-            }
-
-            self.chats = Chat.chats;
+            self.posts = Chat.posts;
             Chat.setActiveChat(chat);
             Chat.start();
 

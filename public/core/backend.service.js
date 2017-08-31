@@ -26,6 +26,14 @@ angular
             return sendRequest('GET', '/chats');
         };
 
+        self.getChat = function (chatId, skip) {
+            var url = '/chats/' + chatId;
+            if (skip) {
+                url += '/' + skip;
+            }
+            return sendRequest('GET', url);
+        };
+
         self.getUserInfo = function (userId) {
             return sendRequest('GET', '/users/' + userId);
         };
