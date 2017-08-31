@@ -21,14 +21,11 @@ angular
                 
             };
 
-            Backend.getUserInfo(chat.buddyId).then(
-                function (resp) {
-                    var avatar = resp.data.avatar;
+            Chat.getBuddyInfo().then(
+                function (buddy) {
+                    var avatar = buddy.avatar;
                     self.buddyAvatar = avatar ? "/images/avatars/100/" + avatar : "/images/100/no-avatar.png";
-                    self.buddyName = resp.data.firstname + " " + resp.data.lastname;
-                },
-                function (resp) {
-
+                    self.buddyName = buddy.firstname + " " + buddy.lastname;
                 }
             );
         }
