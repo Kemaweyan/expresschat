@@ -20,6 +20,9 @@ angular.module('expressChat')
         })
         .when('/chat/:chatId', {
             template: '<chat></chat>'
+        })
+        .when('/search/:query', {
+            template: '<search></search>'
         }).otherwise('/');
     }
 ]);
