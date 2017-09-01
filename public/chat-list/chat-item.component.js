@@ -7,20 +7,19 @@ angular
     bindings: {
         chat: "<"
     },
-    controller: ['Chat',
-        function (Chat) {
+    controller: ['Chat', 'BuddyList', '$location',
+        function (Chat, BuddyList, $location) {
             var self = this;
             self.activeChat = Chat.activeChat;
+            self.buddy = {};
 
             self.$onInit = function () {
-                var avatar = self.chat.buddy.avatar;
-                self.buddyAvatar = avatar ? "/images/avatars/48/" + avatar : "/images/48/no-avatar.png";
-                self.buddyName = self.chat.buddy.firstname + " " + self.chat.buddy.lastname;
+                self.buddy = BuddyList.getBuddy(self.chat.buddy.id);
             };
 
             self.openChat = function () {
                 self.chat.unread = false;
-                Chat.open(self.chat.id);
+                $location.path('/chat/' + self.chat.id);
             };
         }
     ]

@@ -1,9 +1,9 @@
 <div class="chat-item" ng-class="{'unread-chat': $ctrl.chat.unread, 'selected': $ctrl.activeChat.id == $ctrl.chat.id}" ng-click="$ctrl.openChat()">
   <div class="avatar">
-    <img ng-src="{{$ctrl.buddyAvatar}}" alt="{{$ctrl.buddyName}}'s avatar">
+    <img ng-src="{{$ctrl.buddy.mediumAvatar}}" alt="Buddy's avatar">
   </div>
   <div class="buddy-info">
-    <h3>{{$ctrl.buddyName}}</h3>
+    <h3>{{$ctrl.buddy.firstname}} {{$ctrl.buddy.lastname}}</h3>
     <div class="new-messages">
       <span ng-show="$ctrl.chat.unread">New messages</span>
       <span ng-hide="$ctrl.chat.unread">No new messages</span>

@@ -97,7 +97,7 @@ router.get('/chats/:chatId/:skip*?', (req, res, next) => {
 
         postsPromise.then((posts) => {
             res.send({
-                chat: chat.getJSON(),
+                chat: chat.getJSON(req.user._id),
                 posts: posts.map((post) => {
                     return post.getJSON();
                 })

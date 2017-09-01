@@ -2,8 +2,8 @@
 
 angular
   .module('core')
-  .service('ChatList', ['Backend', '$interval', '$rootScope',
-    function (Backend, $interval, $rootScope) {
+  .service('ChatList', ['Backend', 'BuddyList', '$interval', '$rootScope',
+    function (Backend, BuddyList, $interval, $rootScope) {
         var self = this;
         self.chats = [];
         var intervalPromise;
@@ -23,6 +23,8 @@ angular
                                 self.chats[index].unread = chat.unread;
                             }
                         }
+
+                        BuddyList.addBuddy(chat.buddy);
                     });
                 },
                 function (resp) {

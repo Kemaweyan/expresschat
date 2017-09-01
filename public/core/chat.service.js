@@ -2,17 +2,13 @@
 
 angular
   .module('core')
-  .service('Chat', ['Backend', 'User', '$location', '$rootScope', '$interval',
-    function (Backend, User, $location, $rootScope, $interval) {
+  .service('Chat', ['Backend', 'User', '$rootScope', '$interval',
+    function (Backend, User, $rootScope, $interval) {
         var self = this;
         self.activeChat = {id: null};
         self.chat = null;
         self.posts = [];
         var intervalPromise;
-
-        self.open = function (id) {
-            $location.path('/chat/' + id);
-        };
 
         self.setActiveChat = function (id) {
             self.activeChat.id = id;
@@ -39,7 +35,7 @@ angular
         self.send = function (text) {
             var data = {
                 text: text,
-                buddyId: self.chat.buddy
+                buddyId: self.chat.buddy.id
             };
 
             Backend.postNewMessage(data).then(

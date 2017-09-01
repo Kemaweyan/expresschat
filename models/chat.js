@@ -26,16 +26,14 @@ Chat.methods.isUnread = function (userId) {
 };
 
 Chat.methods.getJSON = function (userId) {
-    let buddyId;
-
     let buddy = this.members.find((element, index, array) => {
-        return element._id != userId;
+        return !element._id.equals(userId);
     });
 
     return {
         id: this._id,
         unread: this.isUnread(userId),
-        buddy: buddy
+        buddy: buddy.getJSON()
     };
 };
 
