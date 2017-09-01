@@ -45,6 +45,7 @@ angular
         $rootScope.$watch('authorized', function () {
             if (!$rootScope.authorized) {
                 self.stop();
+                self.chats.length = 0;
             }
         });
     }

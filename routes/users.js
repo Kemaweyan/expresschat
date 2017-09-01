@@ -5,9 +5,28 @@ const User = require("../models/user");
 const router = express.Router();
 
 router.get('/search', (req, res, next) => {
-    const query = unescape(req.query.q);
+    const sanitized = req.query.q.replace(/\W/g, "");
+    const query = new RegExp(sanitized, "i");
 
-    res.send(query);
+    let promise = User.find({
+        $or: [
+            {username: query},
+            {firstname: query},
+            {lastname: query}
+        ]
+    }).where("_id").ne(req.user._id).exec();
+
+    promise.then((users) => {
+        res.send({
+            query: sanitized,
+            buddies: users.map((user) => {
+            return user.getJSON();
+            })
+        });
+    },
+    (err) => {
+        next(err);
+    });
 });
 
 module.exports = router;

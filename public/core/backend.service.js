@@ -34,12 +34,16 @@ angular
             return sendRequest('GET', url);
         };
 
-        self.getUserInfo = function (userId) {
-            return sendRequest('GET', '/users/' + userId);
+        self.getUsers = function (query) {
+            return sendRequest('GET', '/search/?q=' + query);
         };
 
         self.postNewMessage = function (data) {
             return sendRequest('POST', '/chats', data);
+        };
+
+        self.postNewChat = function (buddyId) {
+            return sendRequest('POST', '/chats', {buddyId: buddyId});
         };
 
         function sendRequest(method, url, data) {

@@ -1,1 +1,30 @@
-<div>{{$ctrl.query}}</div>
+<div id="search-results">
+  <h1>Search results for "{{$ctrl.query}}":</h1>
+  <div id="new-search-container">
+    <form ng-submit="$ctrl.search()">
+      <div class="submit">
+        <input type="submit" id="submit" value="SEARCH">
+      </div>
+      <div class="new-query">
+        <input type="text" id="new-query" placeholder="New search" ng-model="$ctrl.newQuery" required>
+      </div>
+    </form>
+  </div>
+  <div id="search-results-container" full-height="165">
+    <div ng-repeat="buddy in $ctrl.buddies" class="buddy panel-border">
+      <div class="avatar">
+        <img ng-src="{{buddy.largeAvatar}}" alt="Buddy's avatar">
+      </div>
+      <div class="buddy-info">
+        <h2>{{buddy.firstName}} {{buddy.lastName}}</h2>
+        <h3>Nickname: {{buddy.userName}}</h3>
+        <div class="open-chat">
+          <input type="button" id="submit" value="OPEN CHAT" ng-click="$ctrl.openChat(buddy.id)">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="empty-result" ng-hide="$ctrl.buddies.length" class="panel-border">
+    Nothing found
+  </div>
+</div>

@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get('/chats', (req, res, next) => {
     Chat.find({members: req.user._id})
+        .where('empty').ne(true)
         .populate('members')
         .then((docs) => {
             res.send(docs.map((chat) => {
@@ -36,10 +37,16 @@ router.post('/chats', (req, res, next) => {
                     req.body.buddyId
                 ];
             }
-            newChat.unreadBy = req.body.buddyId;
-            newChat.save();
 
-            resolve(newChat._id);
+            if (req.body.text) {
+                newChat.empty = false;
+                newChat.unreadBy = req.body.buddyId;
+                resolve(newChat._id);
+            } else {
+                res.send({chatId: newChat._id});
+            }
+
+            newChat.save();
         },
         (err) => {
             reject(err);

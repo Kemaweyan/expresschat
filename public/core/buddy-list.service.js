@@ -27,6 +27,7 @@ angular
             if (!buddy) {
                 buddy = {
                     id: buddyId,
+                    userName: "",
                     firstName: "",
                     lastName: ""
                 };
@@ -35,6 +36,7 @@ angular
             }
 
             if (data) {
+                buddy.userName = data.username;
                 buddy.firstName = data.firstname;
                 buddy.lastName = data.lastname;
                 updateAvatars(buddy, data.avatar);

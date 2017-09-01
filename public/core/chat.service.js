@@ -20,6 +20,7 @@ angular
                 self.chat = null;
             }
             self.stop();
+            self.posts.length = 0;
         });
 
         self.start = function () {

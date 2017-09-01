@@ -153,14 +153,14 @@ h3 {
 #profile-panel .panel-border {
     height: 102px;
 }
-#profile-panel .avatar, #buddy-panel .avatar {
+#profile-panel .avatar, #buddy-panel .avatar, #search-results .avatar {
     width: 102px;
     height: 102px;
 }
-#profile-panel .avatar {
+#profile-panel .avatar, #search-results .avatar {
     float: left;
 }
-#profile-panel .avatar img, #buddy-panel .avatar img {
+#profile-panel .avatar img, #buddy-panel .avatar img, #search-results .avatar img {
     width: 100px;
     height: 100px;
     border-radius: 10px;
@@ -333,4 +333,50 @@ h3 {
     text-align: right;
     height: 32px;
     margin-top: 10px;
+}
+
+#search-results h1 {
+    font: bold 28px Verdana;
+    color: #777;
+}
+#search-results #new-search-container {
+    margin-bottom: 20px;
+}
+#search-results .submit {
+    float: right;
+    width: 140px;
+    text-align: right;
+}
+#search-results .new-query {
+    margin-right: 140px;
+}
+#search-results #empty-result {
+    height: 102px;
+    line-height: 100px;
+    text-align: center;
+    color: 777;
+    font-style: italic;
+}
+#search-results #search-results-container {
+    overflow: auto;
+}
+#search-results .buddy {
+    height: 102px;
+    margin-top: 10px;
+}
+#search-results .buddy-info {
+    margin-left: 120px;
+}
+#search-results .buddy h2 {
+    text-align: left;
+    font: bold 24px Verdana;
+    margin: 0 0 10px 0;
+}
+#search-results .buddy h3 {
+    font: bold 16px Verdana;
+    margin: 0;
+}
+#search-results .buddy .open-chat {
+    text-align: right;
+    margin-top: 7px;
 }
