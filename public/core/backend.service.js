@@ -38,12 +38,8 @@ angular
             return sendRequest('GET', '/search/?q=' + query);
         };
 
-        self.postNewMessage = function (data) {
-            return sendRequest('POST', '/chats', data);
-        };
-
-        self.postNewChat = function (buddyId) {
-            return sendRequest('POST', '/chats', {buddyId: buddyId});
+        self.postNewMessage = function (buddyId, text) {
+            return sendRequest('POST', '/chats/' + buddyId, {text: text});
         };
 
         function sendRequest(method, url, data) {

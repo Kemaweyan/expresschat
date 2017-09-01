@@ -8,11 +8,11 @@ angular
         function (ChatList, Chat, $location) {
             var self = this;
             self.chats = ChatList.chats;
-            self.activeChat = Chat.activeChat;
+            self.activeChat = Chat;
             ChatList.start();
 
-            self.openChat = function (chatId) {
-                $location.path('/chat/' + chatId);
+            self.openChat = function (buddyId) {
+                $location.path('/chat/' + buddyId);
             };
 
             self.search = function () {

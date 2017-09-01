@@ -2,7 +2,7 @@
   <h2>MY CHATS</h2>
   <div id="chat-list" class="panel-border" full-height="353">
     <div ng-repeat="chat in $ctrl.chats" class="chat-item" ng-class="{'unread-chat': chat.unread, 'selected': $ctrl.activeChat.id == chat.id}"
-         ng-click="$ctrl.openChat(chat.id)">
+         ng-click="$ctrl.openChat(chat.buddy.id)">
       <div class="avatar">
         <img ng-src="{{chat.buddy.mediumAvatar}}" alt="Buddy's avatar">
       </div>

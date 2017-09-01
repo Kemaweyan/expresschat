@@ -16,10 +16,6 @@ const Chat = new Schema({
     unreadBy: {
         type: Schema.Types.ObjectId,
         ref: User
-    },
-    empty: {
-        type: Boolean,
-        default: true
     }
 });
 

@@ -8,12 +8,12 @@ angular
         function ($routeParams, Chat, User, BuddyList) {
             var self = this;
             self.user = User;
+            self.buddy = BuddyList.getBuddy($routeParams.buddyId);
 
             self.posts = Chat.posts;
-            Chat.setActiveChat($routeParams.chatId);
-            Chat.start().then(
-                function (chat) {
-                    self.buddy = BuddyList.getBuddy(chat.buddy.id);
+            Chat.start(self.buddy).then(
+                function (buddy) {
+                    self.buddy = buddy;
                 }
             );
 

@@ -18,7 +18,7 @@ angular.module('expressChat')
         .when('/register', {
             template: '<register></register>'
         })
-        .when('/chat/:chatId', {
+        .when('/chat/:buddyId', {
             template: '<chat></chat>'
         })
         .when('/search/:query', {

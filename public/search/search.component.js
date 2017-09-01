@@ -22,11 +22,7 @@ angular
             );
 
             self.openChat = function (buddyId) {
-                Backend.postNewChat(buddyId).then(
-                    function (resp) {
-                        $location.path('/chat/' + resp.data.chatId);
-                    }
-                );
+                $location.path('/chat/' + buddyId);
             };
         }
     ]

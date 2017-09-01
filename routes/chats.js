@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.get('/chats', (req, res, next) => {
     Chat.find({members: req.user._id})
-        .where('empty').ne(true)
         .populate('members')
         .then((docs) => {
             res.send(docs.map((chat) => {
@@ -19,12 +18,12 @@ router.get('/chats', (req, res, next) => {
         });
 });
 
-router.post('/chats', (req, res, next) => {
+router.post('/chats/:buddyId', (req, res, next) => {
     let chatIdPromise = new Promise((resolve, reject) => {
         let findPromise = Chat.findOrCreate({
             $and: [
                 {members: req.user._id},
-                {members: req.body.buddyId}
+                {members: req.params.buddyId}
             ]
         });
 
@@ -34,19 +33,13 @@ router.post('/chats', (req, res, next) => {
             if (result.created) {
                 newChat.members = [
                     req.user._id,
-                    req.body.buddyId
+                    req.params.buddyId
                 ];
             }
-
-            if (req.body.text) {
-                newChat.empty = false;
-                newChat.unreadBy = req.body.buddyId;
-                resolve(newChat._id);
-            } else {
-                res.send({chatId: newChat._id});
-            }
-
+            newChat.unreadBy = req.params.buddyId;
             newChat.save();
+
+            resolve(newChat._id);
         },
         (err) => {
             reject(err);
@@ -78,21 +71,24 @@ router.post('/chats', (req, res, next) => {
     });
 });
 
-router.get('/chats/:chatId/:skip*?', (req, res, next) => {
-    let chatPromise = Chat.findById(req.params.chatId).where({
-        members: req.user._id
+router.get('/chats/:buddyId/:skip*?', (req, res, next) => {
+    let chatPromise = Chat.findOne({
+        $and: [
+            {members: req.user._id},
+            {members: req.params.buddyId}
+        ]
     }).populate('members').exec();
 
     chatPromise.then((chat) => {
         if (!chat) {
-            let err = new Error("Forbidden");
-            err.status = 403;
+            let err = new Error("Not found");
+            err.status = 404;
             return next(err);
         }
 
         chat.markRead(req.user._id);
 
-        let query = Post.find({chat: req.params.chatId});
+        let query = Post.find({chat: chat._id});
 
         if (req.params.skip) {
             query = query.skip(req.params.skip);
