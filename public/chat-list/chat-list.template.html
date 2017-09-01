@@ -17,10 +17,10 @@
     <div ng-if="$ctrl.chats.length == 0" class="empty-list">There are no chats yet</div>
   </div>
   <div id="user-search">
-    <form id="user-search-form">
+    <form id="user-search-form" ng-submit="$ctrl.search()">
       <fieldset>
         <legend>User search</legend>
-        <input type="text" id="query" placeholder="Search" required>
+        <input type="text" id="query" placeholder="Search" ng-model="$ctrl.query" required>
         <div class="submit"><input type="submit" id="submit" value="SEARCH"></div>
       </fieldset>
     </form>
