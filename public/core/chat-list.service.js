@@ -24,7 +24,7 @@ angular
                             }
                         }
 
-                        BuddyList.addBuddy(chat.buddy);
+                        chat.buddy = BuddyList.addBuddy(chat.buddy);
                     });
                 },
                 function (resp) {
