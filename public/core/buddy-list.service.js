@@ -7,7 +7,7 @@ angular
         var self = this;
         var buddies = [];
 
-        function updateAvatar(buddy, data) {
+        function updateBuddy(buddy, data) {
             if (data.avatar) {
                 buddy.smallAvatar = "/images/avatars/32/" + data.avatar;
                 buddy.mediumAvatar = "/images/avatars/48/" + data.avatar;
@@ -16,6 +16,10 @@ angular
                 buddy.smallAvatar = "/images/32/no-avatar.png";
                 buddy.mediumAvatar = "/images/48/no-avatar.png";
                 buddy.largeAvatar = "/images/100/no-avatar.png";
+            }
+            if (data.firstname && data.lastname) {
+                buddy.firstName = data.firstname;
+                buddy.lastName = data.lastname;
             }
         }
 
@@ -26,7 +30,8 @@ angular
 
             if (!buddy) {
                 buddy = {id: buddyId};
-                updateAvatar(buddy, buddy);
+                updateBuddy(buddy, buddy);
+                buddies.push(buddy);
             }
 
             return buddy;
@@ -42,7 +47,7 @@ angular
                 existingBuddy = buddy;
             }
 
-            updateAvatar(existingBuddy, buddy);
+            updateBuddy(existingBuddy, buddy);
         }
     }
 ]);

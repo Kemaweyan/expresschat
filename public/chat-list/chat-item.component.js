@@ -17,7 +17,7 @@ angular
                 self.buddy = BuddyList.getBuddy(self.chat.buddy.id);
             };
 
-            self.openChat = function () {
+            self.openChat = function (id) {
                 self.chat.unread = false;
                 $location.path('/chat/' + self.chat.id);
             };
