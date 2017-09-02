@@ -160,14 +160,14 @@ h3 {
 #profile-panel .panel-border {
     height: 102px;
 }
-#profile-panel .avatar, #buddy-panel .avatar, #search-results .avatar {
+#profile-panel .avatar, #buddy-panel .avatar, #search-results .avatar, #main .avatar {
     width: 102px;
     height: 102px;
 }
-#profile-panel .avatar, #search-results .avatar {
+#profile-panel .avatar, #search-results .avatar, #main .avatar {
     float: left;
 }
-#profile-panel .avatar img, #buddy-panel .avatar img, #search-results .avatar img, #profile-settings .avatar img {
+#profile-panel .avatar img, #buddy-panel .avatar img, #search-results .avatar img, #profile-settings .avatar img, #main .avatar img {
     width: 100px;
     height: 100px;
     border-radius: 10px;
@@ -195,17 +195,17 @@ h3 {
     color: #999;
     font-style: italic;
 }
-#chat-list-panel #user-search {
+.search {
     margin-top: 10px;
 }
-#chat-list-panel #user-search fieldset {
+.search fieldset {
     border: 1px #e0e0e0 solid;
     padding: 10px 20px;
 }
-#chat-list-panel #user-search input[type="text"] {
+.search input[type="text"] {
     border: 1px #999 solid;
 }
-#chat-list-panel #user-search .submit {
+.search .submit {
     text-align: center;
     height: 32px;
     margin-top: 10px;
@@ -218,10 +218,10 @@ h3 {
     border: 1px solid #e0e0e0;
     cursor: pointer;
 }
-#chat-list-panel .chat-item:hover, #chat-list-panel .selected {
+.chat-item:hover, #chat-list-panel .selected {
     background-color: #e6f3ff;
 }
-#chat-list-panel .unread-chat {
+.unread-chat {
     background-color: #f0f8ff;
 }
 
@@ -424,4 +424,42 @@ h3 {
 #settings-form .submit {
     text-align: right;
     margin: 20px 0 0 0;
+}
+
+#main h1 {
+    font: bold 28px Verdana;
+    margin: 20px 0;
+    color: #555;
+    text-align: center;
+}
+#main .search {
+    width: 80%;
+    margin: 20px auto;
+}
+#main .chat-list {
+    width: 650px;
+    margin: 0 auto;
+    overflow: auto;
+}
+#main .chat-item {
+    float: left;
+    width: 300px;
+    height: 102px;
+    margin: 3px;
+    cursor: pointer;
+}
+#main .chat-item .buddy-info {
+    margin-left: 110px;
+    padding-left: 5px;
+}
+#main .chat-item h3 {
+    text-align: center;
+}
+#main .chat-item .new-messages {
+    text-align: center;
+    padding-top: 30px;
+    font-style: italic;
+}
+#main .unread-chat span {
+    color: #f00;
 }

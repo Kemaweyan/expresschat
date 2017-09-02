@@ -1,6 +1,6 @@
 <div id="chat-list-panel" class="panel" full-height="189">
   <h2>MY CHATS</h2>
-  <div id="chat-list" class="panel-border" full-height="353">
+  <div id="chat-list" class="panel-border" full-height="349">
     <div ng-repeat="chat in $ctrl.chats" class="chat-item" ng-class="{'unread-chat': chat.unread, 'selected': $ctrl.activeChat.id == chat.id}"
          ng-click="$ctrl.openChat(chat.buddy.id)">
       <div class="avatar">
@@ -16,7 +16,7 @@
     </div>
     <div ng-if="$ctrl.chats.length == 0" class="empty-list">There are no chats yet</div>
   </div>
-  <div id="user-search">
+  <div class="search">
     <form id="user-search-form" ng-submit="$ctrl.search()">
       <fieldset>
         <legend>User search</legend>

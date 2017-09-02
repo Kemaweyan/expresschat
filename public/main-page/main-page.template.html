@@ -1,3 +1,29 @@
 <div id="main">
-  
+  <div class="panel-border" full-height="52">
+    <h1>Welcome, {{$ctrl.user.firstName}} {{$ctrl.user.lastName}}</h1>
+    <div class="search">
+      <form ng-submit="$ctrl.search()">
+        <fieldset>
+          <legend>Search people</legend>
+          <input type="text" id="query" placeholder="Search" ng-model="$ctrl.query" required>
+          <div class="submit"><input type="submit" id="submit" value="SEARCH"></div>
+        </fieldset>
+      </form>
+    </div>
+    <div class="chat-list" full-height="270">
+      <div class="chat-item panel-border" ng-repeat="chat in $ctrl.chats" ng-class="{'unread-chat': chat.unread}"
+            ng-click="$ctrl.openChat(chat.buddy.id)">
+        <div class="avatar">
+          <img ng-src="{{chat.buddy.largeAvatar}}" alt="Buddy's avatar">
+        </div>
+        <div class="buddy-info">
+          <h3>{{chat.buddy.firstName}} {{chat.buddy.lastName}}</h3>
+          <div class="new-messages">
+            <span ng-show="chat.unread">New messages</span>
+            <span ng-hide="chat.unread">No new messages</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
