@@ -10,7 +10,7 @@
       </div>
     </form>
   </div>
-  <div id="search-results-container" full-height="165">
+  <div id="search-results-container" ng-show="$ctrl.buddies.length" full-height="165">
     <div ng-repeat="buddy in $ctrl.buddies" class="buddy panel-border">
       <div class="avatar">
         <img ng-src="{{buddy.largeAvatar}}" alt="Buddy's avatar">

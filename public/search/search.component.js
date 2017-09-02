@@ -8,6 +8,7 @@ angular
         function ($routeParams, Backend, BuddyList, $location) {
             var self = this;
             self.newQuery = $routeParams.query;
+            self.buddies = [];
 
             Backend.getUsers($routeParams.query).then(
                 function (resp) {
@@ -20,6 +21,10 @@ angular
                     
                 }
             );
+
+            self.search = function () {
+                $location.path('/search/' + self.newQuery);
+            };
 
             self.openChat = function (buddyId) {
                 $location.path('/chat/' + buddyId);
