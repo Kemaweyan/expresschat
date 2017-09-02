@@ -7,9 +7,6 @@ angular.module('expressChat')
 
         $routeProvider
         .when('/', {
-            template: ''
-        })
-        .when('/main', {
             template: '<main-page></main-page>'
         })
         .when('/login', {
@@ -23,6 +20,9 @@ angular.module('expressChat')
         })
         .when('/search/:query', {
             template: '<search></search>'
+        })
+        .when('/settings', {
+            template: '<settings></settings>'
         }).otherwise('/');
     }
 ]);

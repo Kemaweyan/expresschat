@@ -42,11 +42,23 @@ angular
             return sendRequest('POST', '/chats/' + buddyId, {text: text});
         };
 
-        function sendRequest(method, url, data) {
+        self.postSettings = function (data) {
+            var formData = new FormData();
+            angular.forEach(data, function(value, key) {
+                if (value) {
+                    formData.append(key, value);
+                }
+            });
+
+            return sendRequest('POST', '/settings', formData, {'Content-Type': undefined});
+        };
+
+        function sendRequest(method, url, data, headers) {
             return $http({
                 method: method,
                 url: url,
-                data: data
+                data: data,
+                headers: headers
             }).then(
                 null,
                 function (resp) {

@@ -9,5 +9,6 @@ angular.module('expressChat', [
     'chatList',
     'chat',
     'search',
+    'settings',
     'mainPage'
 ]);

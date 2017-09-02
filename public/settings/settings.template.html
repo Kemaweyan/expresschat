@@ -1,1 +1,54 @@
-<div></div>
+<div>
+  <div id="profile-settings">
+    <div class="avatar">
+      <img ng-src="{{$ctrl.user.largeAvatar}}" alt="User's avatar">
+    </div>
+    <h1>{{$ctrl.user.firstName}} {{$ctrl.user.lastName}} profile settings</h1>
+  </div>
+  <div class="panel-border" id="settings-form">
+    <form ng-submit="$ctrl.submit()">
+      <p class="form-error" ng-show="$ctrl.error">{{$ctrl.error}}</p>
+      <fieldset>
+        <legend>Profile settings</legend>
+        <p>
+          <label for="firstname">Firstname:</label><br>
+          <input type="text" id="firstname" ng-model="$ctrl.firstname" required>
+        </p>
+        <p>
+          <label for="lastname">Lastname:</label><br>
+          <input type="text" id="lastname" ng-model="$ctrl.lastname" required>
+        </p>
+        <p>
+          <label for="email">E-mail:</label><br>
+          <input type="text" id="email" ng-model="$ctrl.email" required>
+        </p>
+        <p>
+          <label for="avatar">Avatar:<br>
+            <span class="button-container">
+              <span class="button">BROWSE</span>
+            </span>
+            <span class="mark-container">
+              <mark>{{$ctrl.avatar.name}}</mark>
+            </span>
+            <input type="file" file-upload="$ctrl.avatar" id="avatar">
+          </label>
+        </p>
+        <p>
+          <label for="password">Password:</label><br>
+          <input type="password" id="password" ng-model="$ctrl.password">
+        </p>
+        <p>
+          <label for="newpassword">New password:</label><br>
+          <input type="password" id="newpassword" ng-model="$ctrl.newpassword">
+        </p>
+        <p>
+          <label for="confirm">Confirm new password:</label><br>
+          <input type="password" id="confirm" ng-model="$ctrl.confirm" compare-to="$ctrl.newpassword">
+        </p>
+      </fieldset>
+      <div class="submit">
+        <input type="submit" value="SAVE">
+      </div>
+    </form>
+  </div>
+</div>

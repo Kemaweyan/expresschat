@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 const passportLocalMongoose = require("passport-local-mongoose");
+const fs = require("fs");
 
 const User = new mongoose.Schema({
     username: {
@@ -54,6 +55,15 @@ User.methods.getJSON = function () {
         email: this.email,
         avatar: this.avatar
     };
+};
+
+User.methods.setAvatar = function (filename) {
+    if (this.avatar) {
+        fs.unlink("public/images/avatars/32/" + this.avatar, (err) => {});
+        fs.unlink("public/images/avatars/48/" + this.avatar, (err) => {});
+        fs.unlink("public/images/avatars/100/" + this.avatar, (err) => {});
+    }
+    this.avatar = filename;
 };
 
 module.exports = mongoose.model('users', User);
