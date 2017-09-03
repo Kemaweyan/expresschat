@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const session = require("express-session");
+const morgan = require("morgan");
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/expresschat', {useMongoClient: true});
@@ -19,6 +20,7 @@ const users = require("./routes/users");
 
 const app = express();
 
+app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
