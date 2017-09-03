@@ -18,6 +18,10 @@ angular
                     setAvatar(avatar);
                 },
                 function (resp) {
+                    if (resp.status == 401) {
+                        return;
+                    }
+
                     $timeout(function () {
                         setAvatarAsync(avatar);
                     }, 1000);
