@@ -8,6 +8,25 @@ const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const session = require("express-session");
 const morgan = require("morgan");
+const fs = require("fs");
+
+const dirs = [
+    './uploads',
+    'public/images/avatars',
+    'public/images/avatars/32',
+    'public/images/avatars/48',
+    'public/images/avatars/100'
+];
+
+function mkdir(dir) {
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+}
+
+dirs.map((dir) => {
+    return mkdir(dir);
+});
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/expresschat', {useMongoClient: true});
