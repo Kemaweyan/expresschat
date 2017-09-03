@@ -23,7 +23,9 @@ angular
             );
 
             self.search = function () {
-                $location.path('/search/' + self.newQuery);
+                if (self.newQuery) {
+                    $location.path('/search/' + self.newQuery);
+                }
             };
 
             self.openChat = function (buddyId) {

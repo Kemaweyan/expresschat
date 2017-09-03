@@ -16,8 +16,10 @@ angular
             };
 
             self.search = function () {
-                $location.path('/search/' + self.query);
-                self.query = "";
+                if (self.query) {
+                    $location.path('/search/' + self.query);
+                    self.query = "";
+                }
             };
         }
     ]

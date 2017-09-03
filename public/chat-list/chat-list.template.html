@@ -20,7 +20,7 @@
     <form id="user-search-form" ng-submit="$ctrl.search()">
       <fieldset>
         <legend>User search</legend>
-        <input type="text" id="query" placeholder="Search" ng-model="$ctrl.query" required>
+        <input type="text" id="query" placeholder="Search" press-enter="$ctrl.search()" ng-model="$ctrl.query" required>
         <div class="submit"><input type="submit" id="submit" value="SEARCH"></div>
       </fieldset>
     </form>

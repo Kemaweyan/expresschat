@@ -11,7 +11,9 @@ angular
             self.chats = ChatList.chats;
 
             self.search = function () {
-                $location.path('/search/' + self.query);
+                if (self.query) {
+                    $location.path('/search/' + self.query);
+                }
             };
 
             self.openChat = function (buddyId) {

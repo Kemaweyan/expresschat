@@ -6,7 +6,7 @@
         <input type="submit" id="submit" value="SEARCH">
       </div>
       <div class="new-query">
-        <input type="text" id="new-query" placeholder="New search" ng-model="$ctrl.newQuery" required>
+        <input type="text" id="new-query" press-enter="$ctrl.search()" placeholder="Search" ng-model="$ctrl.newQuery" required>
       </div>
     </form>
   </div>
