@@ -20,7 +20,7 @@ router.get('/search', (req, res, next) => {
         res.send({
             query: sanitized,
             buddies: users.map((user) => {
-            return user.getJSON();
+                return user.getJSON();
             })
         });
     },

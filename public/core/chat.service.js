@@ -5,7 +5,6 @@ angular
   .service('Chat', ['Backend', 'User', 'BuddyList', '$rootScope', '$interval',
     function (Backend, User, BuddyList, $rootScope, $interval) {
         var self = this;
-        self.id = null;
         self.buddy = null;
         self.posts = [];
         var intervalPromise;
@@ -13,7 +12,6 @@ angular
         $rootScope.$on('$routeChangeStart', function (event, current, previous, reject) {
             if (!current.$$route || current.$$route.originalPath != "/chat/:buddyId") {
                 self.buddy = null;
-                self.id = null;
             }
             self.stop();
             self.posts.length = 0;
@@ -21,9 +19,8 @@ angular
 
         self.start = function (buddy) {
             self.buddy = buddy;
-            var promise = getPostList();
+            getPostList();
             intervalPromise = $interval(getPostList, 1000);
-            return promise;
         };
 
         self.stop = function () {
@@ -32,7 +29,9 @@ angular
 
         self.send = function (text) {
             Backend.postNewMessage(self.buddy.id, text).then(
-                null,
+                function (resp) {
+                    
+                },
                 function (resp) {
                     
                 }
@@ -54,9 +53,8 @@ angular
         }
 
         function getPostList() {
-            return Backend.getChat(self.buddy.id).then(
+            Backend.getChat(self.buddy.id).then(
                 function (resp) {
-                    self.id = resp.data.chat.id;
                     var posts = resp.data.posts;
                     posts.reverse();
                     posts.forEach(function (post, index, array) {
@@ -71,10 +69,10 @@ angular
                         }
                     });
 
-                    return BuddyList.addBuddy(resp.data.chat.buddy);
+                    BuddyList.addBuddy(resp.data.chat.buddy);
                 },
                 function (resp) {
-
+                    
                 }
             );
         }

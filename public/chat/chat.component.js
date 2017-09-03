@@ -11,11 +11,7 @@ angular
             self.buddy = BuddyList.getBuddy($routeParams.buddyId);
 
             self.posts = Chat.posts;
-            Chat.start(self.buddy).then(
-                function (buddy) {
-                    self.buddy = buddy;
-                }
-            );
+            Chat.start(self.buddy);
 
             self.submit = function () {
                 if (self.text) {

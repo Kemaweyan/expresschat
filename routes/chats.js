@@ -2,6 +2,7 @@ const express = require("express");
 
 const Chat = require("../models/chat");
 const Post = require("../models/post");
+const User = require("../models/user");
 
 const router = express.Router();
 
@@ -81,9 +82,20 @@ router.get('/chats/:buddyId/:skip*?', (req, res, next) => {
 
     chatPromise.then((chat) => {
         if (!chat) {
-            let err = new Error("Not found");
-            err.status = 404;
-            return next(err);
+            let buddyPromise = User.findById(req.params.buddyId).exec();
+
+            return buddyPromise.then((buddy) => {
+                res.send({
+                    posts: [],
+                    chat: {
+                        buddy: buddy.getJSON()
+                    }
+                });
+            },
+            (err) => {
+                err.status = 404;
+                next(err);
+            });
         }
 
         chat.markRead(req.user._id);
