@@ -2,8 +2,8 @@
 
 angular
   .module('core')
-  .service('Chat', ['Backend', 'User', 'BuddyList', '$rootScope', '$interval',
-    function (Backend, User, BuddyList, $rootScope, $interval) {
+  .service('Chat', ['Backend', 'User', 'BuddyList', '$rootScope', '$interval', '$location',
+    function (Backend, User, BuddyList, $rootScope, $interval, $location) {
         var self = this;
         self.buddy = null;
         self.posts = [];
@@ -72,7 +72,9 @@ angular
                     BuddyList.addBuddy(resp.data.chat.buddy);
                 },
                 function (resp) {
-                    
+                    if (resp.status == 404) {
+                        $location.path('/');
+                    }
                 }
             );
         }
