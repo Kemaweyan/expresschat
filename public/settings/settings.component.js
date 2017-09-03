@@ -4,15 +4,17 @@ angular
   .module('settings')
   .component('settings', {
     templateUrl: "settings/settings.template.html",
-    controller: ['Backend', 'User',
-        function (Backend, User) {
+    controller: ['Backend', 'User', '$scope',
+        function (Backend, User, $scope) {
             var self = this;
             self.user = User;
 
             User.ready().then(function () {
-                self.firstname = User.firstName;
-                self.lastname = User.lastName;
-                self.email = User.email;
+                $scope.$apply(function () {
+                    self.firstname = User.firstName;
+                    self.lastname = User.lastName;
+                    self.email = User.email;
+                });
             });
 
             self.submit = function () {
