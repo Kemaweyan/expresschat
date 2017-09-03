@@ -85,6 +85,12 @@ router.get('/chats/:buddyId/:skip*?', (req, res, next) => {
             let buddyPromise = User.findById(req.params.buddyId).exec();
 
             return buddyPromise.then((buddy) => {
+                if (!buddy) {
+                    let err = new Error("Not found");
+                    err.status = 404;
+                    return next(err);
+                }
+
                 res.send({
                     posts: [],
                     chat: {
@@ -121,6 +127,7 @@ router.get('/chats/:buddyId/:skip*?', (req, res, next) => {
             return next(err);
         });
     }, (err) => {
+        err.status = 404;
         return next(err);
     });
 });
