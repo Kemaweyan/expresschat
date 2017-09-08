@@ -2,44 +2,69 @@
 
 angular
   .module('core')
-  .service('ChatList', ['Backend', 'BuddyList', '$interval', '$rootScope',
-    function (Backend, BuddyList, $interval, $rootScope) {
+  .service('ChatList', ['Backend', 'BuddyList', '$rootScope', '$q',
+    function (Backend, BuddyList, $rootScope, $q) {
         var self = this;
         self.chats = [];
-        var intervalPromise;
+        var cancelPromise;
+
+        var getChatListUpdates = function () {
+            Backend.getChatListUpdates(cancelPromise.promise).then(
+                function (resp) {
+                    var chat = resp.data;
+                    var chatIndex = self.chats.findIndex(function (element, index, array) {
+                        return element.id == chat.id;
+                    });
+
+                    if (chatIndex < 0) {
+                        self.chats.push(chat);
+                    } else {
+                        if (chat.unread != self.chats[chatIndex].unread) {
+                            self.chats[chatIndex].unread = chat.unread;
+                        }
+                    }
+
+                    chat.buddy = BuddyList.addBuddy(chat.buddy);
+                },
+                function (resp) {
+                    /*if (resp.status < 0 && resp.xhrStatus == "error") {
+                        self.stop();
+                    }*/
+                }
+            ).finally(
+                function () {
+                    if (cancelPromise && cancelPromise.promise.$$state.status == 0) {
+                        getChatListUpdates();
+                    }
+                }
+            );
+        };
 
         var getChatList = function () {
             Backend.getChatList().then(
                 function (resp) {
                     resp.data.forEach(function (chat, index, array) {
-                        var chatIndex = self.chats.findIndex(function (element, index, array) {
-                            return element.id == chat.id;
-                        });
-
-                        if (chatIndex < 0) {
-                            self.chats.push(chat);
-                        } else {
-                            if (chat.unread != self.chats[index].unread) {
-                                self.chats[index].unread = chat.unread;
-                            }
-                        }
-
+                        self.chats.push(chat);
                         chat.buddy = BuddyList.addBuddy(chat.buddy);
                     });
+
+                    getChatListUpdates();
                 },
                 function (resp) {
-
+                    
                 }
             );
         };
 
         self.start = function () {
+            cancelPromise = $q.defer();
             getChatList();
-            intervalPromise = $interval(getChatList, 1000);
         }
 
         self.stop = function () {
-            $interval.cancel(intervalPromise);
+            if (cancelPromise) {
+                cancelPromise.resolve();
+            }
         };
 
         $rootScope.$watch('authorized', function () {

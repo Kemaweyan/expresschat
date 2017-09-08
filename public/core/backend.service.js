@@ -53,12 +53,21 @@ angular
             return sendRequest('POST', '/settings', formData, {'Content-Type': undefined});
         };
 
-        function sendRequest(method, url, data, headers) {
+        self.getChatListUpdates = function (promise) {
+            return sendRequest('GET', '/updates', undefined, undefined, promise);
+        };
+
+        self.getChatUpdates = function (chatId, promise) {
+            return sendRequest('GET', '/updates/' + chatId, undefined, undefined, promise);
+        };
+
+        function sendRequest(method, url, data, headers, timeout) {
             return $http({
                 method: method,
                 url: url,
                 data: data,
-                headers: headers
+                headers: headers,
+                timeout: timeout
             }).then(
                 null,
                 function (resp) {

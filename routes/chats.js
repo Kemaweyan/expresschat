@@ -5,6 +5,7 @@ const Post = require("../models/post");
 const User = require("../models/user");
 
 const router = express.Router();
+const longpoll = require("express-longpoll")(router);
 
 router.get('/chats', (req, res, next) => {
     Chat.find({members: req.user._id})
@@ -40,6 +41,12 @@ router.post('/chats/:buddyId', (req, res, next) => {
             newChat.unreadBy = req.params.buddyId;
             newChat.save();
 
+            newChat
+              .populate('unreadBy')
+              .populate('members', (err, chat) => {
+                longpoll.publishToId("/updates", req.params.buddyId, chat.getJSON(req.params.buddyId));
+            });
+
             resolve(newChat._id);
         },
         (err) => {
@@ -63,6 +70,8 @@ router.post('/chats/:buddyId', (req, res, next) => {
             if (err) {
                 return next(err);
             }
+
+            longpoll.publishToId("/updates/:chatId", chatId, post.getJSON());
 
             res.send(post.getJSON());
         });
@@ -104,8 +113,6 @@ router.get('/chats/:buddyId/:skip*?', (req, res, next) => {
             });
         }
 
-        chat.markRead(req.user._id);
-
         let query = Post.find({chat: chat._id});
 
         if (req.params.skip) {
@@ -130,6 +137,35 @@ router.get('/chats/:buddyId/:skip*?', (req, res, next) => {
         err.status = 404;
         return next(err);
     });
+});
+
+longpoll.create("/updates", (req, res, next) => {
+    req.id = req.user._id;
+    next();
+});
+
+longpoll.create("/updates/:chatId", (req, res, next) => {
+    req.id = req.params.chatId;
+
+    Chat.findById(req.params.chatId)
+        .populate('members')
+        .populate('unreadBy')
+        .exec()
+        .then((chat, err) => {
+            if (err) {
+                return next(err);
+            }
+
+            let promise = chat.markRead(req.user._id);
+
+            if (promise) {
+                promise.then(() => {
+                    longpoll.publishToId("/updates", req.user._id, chat.getJSON(req.user._id));
+                });
+            }
+    });
+
+    next();
 });
 
 module.exports = router;

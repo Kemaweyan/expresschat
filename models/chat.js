@@ -15,7 +15,7 @@ const Chat = new Schema({
     ],
     unreadBy: {
         type: Schema.Types.ObjectId,
-        ref: User
+        ref: 'users'
     }
 });
 
@@ -40,7 +40,7 @@ Chat.methods.getJSON = function (userId) {
 Chat.methods.markRead = function (userId) {
     if (this.isUnread(userId)) {
         this.unreadBy = null;
-        this.save();
+        return this.save();
     }
 };
 
